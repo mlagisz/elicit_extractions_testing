@@ -1,0 +1,1466 @@
+---
+title: "analyses_main"
+author: "ML"
+date: "2025-07-24"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+#install.packages("pacman")
+
+knitr::opts_chunk$set(echo = TRUE)
+
+pacman::p_load(
+  tidyverse,
+  here,
+  lubridate,
+  rmarkdown,
+  ggplot2,
+  patchwork
+)
+
+#https://www.color-hex.com/color-palette/49436 #some hex palette for the plots
+#Colors from: https://grafify.shenoylab.com/colour_palettes.html
+```
+
+
+NOTE: during development and main testing phases we used human assessment of matches with answers from Elicit because for some categorical variables and other it made sense to be more flexible/inclusive using human interpretation, especially for partial matches (otherwise higher mismatch rate). These decision alongside comments were recorded in Excel sheets.
+
+
+## Load and prepare main data for the development and main test phases
+
+```{r}
+rdata <- read.csv(here("data_raw", "Elicit_results_summary_v0_all.csv"))
+dim(rdata)
+names(rdata) 
+
+length(unique(rdata$Review)) #7 reviews
+length(unique(rdata$SET)) #4: DEV, TEST, RETEST, HATEST
+length(unique(rdata$Variable_nr)) #15 
+length(unique(rdata$Person)) #6 - initials of the team members collecting data
+length(unique(rdata$Iteration)) #9 combinations of Iteration and SET, including GOLD STANDARD
+length(unique(rdata$Answer_structure_type)) #4 types
+
+#create a new column by joining Review and Column_name:
+rdata <- rdata %>%
+  mutate(Review_Variable = paste(Review, Column_name, sep = "_"))
+#length(unique(rdata$Review_Variable)) #90 unique combinations of Review and Column_name
+
+#count number of answer options in Answer_structure2:
+rdata$Answer_structure_size <- str_count(rdata$Answer_structure, ",") + 1 #+1 to count the last item
+table(rdata$Answer_structure_size)
+table(rdata$Answer_structure_size, rdata$Answer_structure_type) #for categorical answers 2-11 options
+
+#clean Column_name
+#table(rdata$Column_name) #one has /n
+#rdata$Column_name <- gsub("\n", " ", rdata$Column_name) #replace "\n" with " "
+```
+
+
+Add columns with success and accuracy
+
+```{r}
+#create a new binary column called "Success" where success is  1 when min "N_correct" >= 7 and 0 otherwise:
+rdata %>% 
+  mutate(Success = ifelse(N_correct >= 7, 1, 0)) -> rdata
+ 
+#create a new column called "Accuracy" = "N_correct"/8 :
+rdata %>% 
+  mutate(Accuracy = N_correct/8) -> rdata
+```
+
+
+Subset data frame by SET (create subsets for DEV, TEST, RETEST, HATEST, and GOLD STANDARD):
+
+```{r}
+#create subsets of summarised results for GOLD STANDARD values from DEV and TEST sets:
+rdata_DEV_GS <- rdata %>% filter(SET == "DEV" & Iteration == "GOLD STANDARD")
+dim(rdata_DEV_GS) #90 rows
+rdata_TEST_GS <- rdata %>% filter(SET == "TEST" & Iteration == "GOLD STANDARD")
+#dim(rdata_TEST_GS) #70 rows
+
+#create subsets of summarised results for DEV set:
+rdata_DEV <- rdata %>% filter(SET == "DEV" & Iteration != "GOLD STANDARD") 
+#dim(rdata_DEV) #243 rows
+#table(rdata_DEV$Iteration) #table of iterations  = iterations 1-5 only
+
+#create subsets of summarised results for TEST, RETEST and HATEST sets:
+rdata_TEST <- rdata %>% filter(SET == "TEST" & Iteration != "GOLD STANDARD")
+#dim(rdata_TEST) #70 rows
+rdata_RETEST <- rdata %>% filter(SET == "RETEST" & Iteration != "GOLD STANDARD")
+#dim(rdata_RETEST) #70 rows
+rdata_HATEST <- rdata %>% filter(SET == "HATEST" & Iteration != "GOLD STANDARD")
+#dim(rdata_HATEST) #70 rows
+```
+
+
+## Results for the development phase (DEV)
+
+Summarize prompt development phase - how many variables were successful, how many iterations were needed, and what was the final accuracy?
+
+```{r}
+#table(rdata_DEV$Success) #table of Success - 116 are successful out of 243 iterations
+#table(rdata_DEV$Iteration)
+#table(rdata_DEV$Accuracy) #57 iterations had 100% accuracy
+
+#NOTE we can use either last (max) iteration or iteration with highest accuracy (usually last iteration recorded was the one with highest accuracy, but there were a few exceptions when trying to further refine the prompt)
+
+#select only the rows with last Iteration variable value per Review_Variable:
+rdata_DEV %>%
+  group_by(Review_Variable) %>%
+  #filter(Accuracy == max(as.numeric(Accuracy), na.rm = TRUE)) %>%
+  filter(Iteration == max(as.numeric(Iteration), na.rm = TRUE)) -> rdata_DEV_max
+
+#check how many rows are in rdata_DEV_max:
+dim(rdata_DEV_max) #90 rows
+#length(unique(rdata_DEV$Review_Variable)) #90 matching
+
+#check how many of these are successful:
+table(rdata_DEV_max$Success) #70 successful (=1), 20 not successful (=0)
+
+#check how many iterations in total were taken for all variables:
+sum(as.numeric(rdata_DEV_max$Iteration)) #231
+
+#check how many iterations in total were taken by SuCcess:
+sum(as.numeric(rdata_DEV_max$Iteration[rdata_DEV_max$Success == 0])) #100 iterations for 20 unsuccessful variables (100/231 = 43%)
+sum(as.numeric(rdata_DEV_max$Iteration[rdata_DEV_max$Success == 1])) #131 iterations for 70 successful variables
+
+
+#check how many iterations were taken for successful variables:
+rdata_DEV_max %>%
+  filter(Success == 1) %>% 
+  group_by(Column_name, Review) %>%
+  summarise(Iteration = max(Iteration)) %>%
+  ungroup() -> rdata_DEV_max_iterations
+table(rdata_DEV_max_iterations$Iteration) #table of Iteration counts - 1-5 iterations per variable, most were 1-2 iterations
+
+#how many variables tested per Review and success rate:
+rdata_DEV_max %>%
+  group_by(Review) %>%
+  summarise(N_variables = n(), 
+            Success_rate = 10 / N_variables) -> variables_per_review
+variables_per_review
+
+#table of how many iterations per Review:
+rdata_DEV_max %>%
+  filter(Success == 1) %>%
+  group_by(Review) %>%
+  summarise(Min_I = min(as.numeric(Iteration)),
+            Max_I = max(as.numeric(Iteration)),
+            Mean_I = mean(as.numeric(Iteration)),
+            Median_I = median(as.numeric(Iteration)),
+            ) -> iterations_per_review
+iterations_per_review #both successful and unssuccesful!
+
+#hist(as.numeric(rdata_DEV$Accuracy)) - left squed
+# Accuracy per variable:
+rdata_DEV %>%
+  summarise(Min_A = min(as.numeric(Accuracy)),
+            Max_A = max(as.numeric(Accuracy)),
+            Mean_A = mean(as.numeric(Accuracy)),
+            Median_A = median(as.numeric(Accuracy))
+            ) -> accuracy_per_variable_DEV
+accuracy_per_variable_DEV
+
+#table of level of Accuracy per Review in the last iteration:
+rdata_DEV_max %>%
+  filter(Success == 1) %>%
+  group_by(Review) %>%
+  summarise(Min_A = min(as.numeric(Accuracy)),
+            Max_A = max(as.numeric(Accuracy)),
+            Mean_A = mean(as.numeric(Accuracy)),
+            Median_A = median(as.numeric(Accuracy)),
+            ) -> accuracy_per_review
+
+#Merge the unsuccessful_per_review, iterations_per_review and accuracy_per_review tables together:
+variables_per_review %>%
+  left_join(iterations_per_review, by = "Review") %>%
+  left_join(accuracy_per_review, by = "Review") -> summary_per_review
+#summary_per_review
+
+#round values in columns Success_rate, Mean_I, Mode_I, Min_A, Mean_A, Median_A to 2 digital places:
+summary_per_review <- summary_per_review %>%
+  mutate(Success_rate = round(Success_rate, 2),
+         Mean_I = round(Mean_I, 2),
+         Median_I = round(Median_I, 2),
+         Min_A = round(Min_A, 2),
+         Mean_A = round(Mean_A, 2),
+         Median_A = round(Median_A, 2))
+
+#export table summary_per_review into a csv file:
+write.csv(summary_per_review, here("data_processed", "summary_per_review_DEV.csv"), row.names = FALSE)
+```  
+
+
+Which variables were most successful during development?
+
+```{r}
+#names(rdata_DEV_max)
+#View(table(rdata_DEV_max$Column_name, rdata_DEV_max$Answer_structure_type)) #table of Answer_structure_type per Column_name - checking
+
+
+#table of Answer_structure_type counts in the DEV data set:
+table(rdata_DEV_max$Answer_structure_type) #counts of each type of variable
+#table of Answer_structure_type frequencies(%) in the DEV data set:
+round(table(rdata_DEV_max$Answer_structure_type)/length(rdata_DEV_max$Answer_structure_type)*100, 2) #as % 
+#table of Success values per Answer_structure_type:
+table(rdata_DEV_max$Success, rdata_DEV_max$Answer_structure_type, useNA = "always") 
+#statistical test for counts in rdata_DEV_max$Success vs rdata_DEV_max$Answer_structure_type:
+chisq.test(table(rdata_DEV_max$Success, rdata_DEV_max$Answer_structure_type)) #X-squared = 2.6287, df = 3, p-value = 0.4525 - no significant association between success and answer structure type
+
+#Success_rate per Answer_structure_type:
+rdata_DEV_max %>%
+  group_by(Answer_structure_type) %>%
+  summarise(Success_rate = sum(Success)/n()) %>%
+  mutate(Success_rate = round(Success_rate, 2))
+
+#Accuracy per Answer_structure_type:
+rdata_DEV_max %>%
+  group_by(Answer_structure_type) %>%
+  summarise(mAccuracy = mean(as.numeric(Accuracy), na.rm = TRUE)) %>%
+  mutate(mAccuracy = round(mAccuracy, 2))
+
+
+### Figure 2
+
+#make a  stacked bar plot using ggplot2 with Answer_structure_typeas a grouping variable and the counts of Success on y-axis but reorder the Answer Structure type to have "Yes/No" as teh first bar and add counts labels to each bar:
+rdata_DEV_max %>%
+  mutate(Answer_structure_type = factor(Answer_structure_type, levels=c("Yes/No", "Categorical", "Name/Other", "Number"))) %>%
+  ggplot(aes(x = Answer_structure_type, fill = as.factor(Success))) +
+  geom_bar(stat = "count", position = "stack") +
+  labs(title = "",
+       x = "Answer structure type",
+       y = "Count of variables",
+       fill = "Success") +
+  scale_fill_manual(values = c("#d55e00", "#009e73"), labels = c("0" = "Failed", "1" = "Successful")) +
+  theme_classic() +
+  geom_text(stat = 'count', aes(label = ..count..), position = position_stack(vjust = 0.5), color = "white") #add counts labels to each bar
+
+
+#Export figure to a png file:
+ggsave(filename = here("plots", "success_per_answer_structure.png"), width = 8, height = 3, dpi = 300)
+```
+
+
+How different and same variables were used and performed across 7 reviews?
+
+```{r}
+#create a heatmap-style grid plot using Column_name as y-axis (ordered by overall success rate) and Review as x-axis, with Success as fill color:
+rdata_DEV_max %>%
+  group_by(Column_name, Review) %>%
+  summarise(Success = max(Success)) %>%
+  ungroup() -> rdata_DEV_max_summary
+
+#order Column_name by overall success rate:
+
+rdata_DEV_max_summary$Column_name <- factor(rdata_DEV_max_summary$Column_name, 
+                                     levels = rev(rdata_DEV_max %>%
+                                       group_by(Column_name) %>%
+                                       summarise(Success_rate = mean(Success)) %>%
+                                       arrange(desc(Success_rate)) %>%
+                                       pull(Column_name)) )
+
+#create a new variable Review_ref by substituting "_" symbol in Review variable by " et al. ":
+rdata_DEV_max_summary <- rdata_DEV_max_summary %>%  mutate(Review_ref = gsub("_", " et al. ", Review))
+
+
+### Figure 3
+
+#make a heatmap-style grid plot:
+rdata_DEV_max_summary %>%
+  mutate(Success = factor(Success, levels = c("1", "0"))) %>%
+  ggplot(aes(x = Review_ref, y = Column_name, fill = as.factor(Success))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(values = c("#009e73", "#d55e00"), labels = c("0" = "Failed", "1" = "Successful")) +
+    labs(title = "",
+       x = "Review",
+       y = "Variable",
+       fill = "Success") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) +
+  theme(legend.position = "top") + # Modify legend position
+  labs(fill = "Prompt development phase outcome:") # Modify legend title
+
+#Export figure to a png file:
+ggsave(filename = here("plots", "success_per_variable_review.png"), width = 10, height = 10, dpi = 300, scale = 0.8)
+```
+
+
+Which variables were used once or more across reviews?
+
+```{r}
+#occurrence of Column_name across Review:
+rdata_DEV_max %>%
+  group_by(Column_name) %>%
+  summarise(Count = n()) %>%
+  arrange(desc(Count)) -> column_name_counts
+
+#dim(column_name_counts) #50 rows, 2 columns
+table(column_name_counts$Count) #table of counts of Column_name across reviews - 40 out of 50 were only used once, 10 were used more than once, only 4 across all reviews
+
+#Which variables were used in all 7 reviews?
+rdata_DEV_max %>%
+  group_by(Column_name) %>%
+  summarise(Count = n()) %>% #View()
+  filter(Count == 7) #Authors contributions, Conflict of interests, Registered protocol, Supplementary materials
+```
+
+
+Success of reporting versus study scope/methods variables?
+
+```{r}
+table(rdata_DEV_max$Study_scope_reporting) #44 reporting, 46 scope/methods
+
+#table of Acuuracy per Study_scope_reporting:
+rdata_DEV_max %>%
+  group_by(Study_scope_reporting) %>%
+  summarise(Success_rate = sum(Success)/n()) %>%
+  mutate(Success_rate = round(Success_rate, 2)) -> success_Study_scope_reporting #similar 0/75 vs. 0.8
+success_Study_scope_reporting
+
+#statistical test for counts in rdata_DEV_max$Success vs rdata_DEV_max$tudy_scope_reporting:
+chisq.test(table(rdata_DEV_max$Success, rdata_DEV_max$Study_scope_reporting)) #X-squared = 2.6287, df = 3, p-value = 0.4525 - no significant association between success and Study_scope_reporting
+
+#Filter out Study_scope_reporting == "Study reporting" and count Success of 0 amd 1 by Column_name :
+# rdata_DEV_max %>%
+#   filter(Study_scope_reporting == "Study reporting") %>%
+#   group_by(Column_name)
+  
+#View table for all variables and reviews:
+# rdata_DEV_max %>%
+#   group_by(Column_name, Review, Study_scope_reporting) %>%
+#   summarise(Success = max(Success)) %>% View() 
+```
+
+
+
+## Results for the main test set (TEST)
+
+Summarize main testing phase - how many variables and which were successful, and what was the final accuracy?
+
+Overall summary for success rates.
+
+```{r}
+#names(rdata_TEST)
+#dim(rdata_TEST) #70 rows - each row is combination of Review and Column_name
+#length(unique(rdata_TEST$Column_name)) #40 unique names of variables out of 70 (some variable names or variables in many reviews)
+
+table(rdata_TEST$Success, useNA = "always") #table of Success - 47 are successful, 23 not, out of 70 tests (67% success)
+
+#table of level of success per Review:
+rdata_TEST %>%
+  group_by(Review) %>%
+  summarise(N_successful = sum(as.numeric(Success)),
+            Success_rate = sum(as.numeric(Success))/10, #show as percent out of 10 variables tested in the TEST phase
+            ) -> success_per_review_TEST
+success_per_review_TEST
+```
+
+Summary for accuracy rates:
+
+```{r}
+#hist(as.numeric(rdata_TEST$Accuracy))  - left skew
+# Accuracy per variable:
+rdata_TEST %>%
+  summarise(Min_A = min(as.numeric(Accuracy)),
+            Max_A = max(as.numeric(Accuracy)),
+            Mean_A = mean(as.numeric(Accuracy)),
+            Median_A = median(as.numeric(Accuracy))
+            ) -> accuracy_per_variable_TEST
+accuracy_per_variable_TEST
+
+#table of level of Accuracy per Review:
+rdata_TEST %>%
+  group_by(Review) %>%
+  summarise(Min_A = min(as.numeric(Accuracy)),
+            Max_A = max(as.numeric(Accuracy)),
+            Mean_A = mean(as.numeric(Accuracy)),
+            Median_A = median(as.numeric(Accuracy))
+            ) -> accuracy_per_review_TEST
+accuracy_per_review_TEST
+
+#export table summary_per_review into a csv file:
+write.csv(accuracy_per_review_TEST, here("data_processed", "summary_per_review_TEST.csv"), row.names = FALSE)
+```  
+
+
+Compare accuracy of each variable between DEV and TEST phases?
+
+```{r}
+#make a new data frame by left_join rdata_DEV_max to rdata_TEST by matching Review and Column_name:
+rdata_DEV_max %>%
+  select(Review, Column_name, Accuracy) %>%
+  rename(Accuracy_DEV = Accuracy) -> rdata_DEV_max_accuracy
+rdata_TEST %>%
+  select(Review, Column_name, Accuracy) %>%
+  rename(Accuracy_TEST = Accuracy) -> rdata_TEST_accuracy
+rdata_DEV_max_accuracy %>%
+  left_join(rdata_TEST_accuracy, by = c("Review", "Column_name")) -> rdata_DEV_TEST_accuracy
+#View(rdata_DEV_TEST_accuracy)
+
+#remove rows that have NA in the Accuracy_TEST COLUMN:
+rdata_DEV_TEST_accuracy <- rdata_DEV_TEST_accuracy %>%
+  filter(!is.na(Accuracy_TEST))
+
+#calculate min, max, median for rdata_DEV_TEST_accuracy$Accuracy_DEV and  rdata_DEV_TEST_accuracy$Accuracy_TEST with one value each:
+rdata_DEV_TEST_accuracy %>% ungroup() %>%
+  summarise(Min_Accuracy_DEV = min(Accuracy_DEV, na.rm = TRUE),
+            Max_Accuracy_DEV = max(Accuracy_DEV, na.rm = TRUE),
+            Median_Accuracy_DEV = median(Accuracy_DEV, na.rm = TRUE),
+            Min_Accuracy_TEST = min(Accuracy_TEST, na.rm = TRUE),
+            Max_Accuracy_TEST = max(Accuracy_TEST, na.rm = TRUE),
+            Median_Accuracy_TEST = median(Accuracy_TEST, na.rm = TRUE)) -> accuracy_summary
+  
+#test for correlation between Accuracy_DEV and Accuracy_TEST
+cor.test(rdata_DEV_TEST_accuracy$Accuracy_DEV, rdata_DEV_TEST_accuracy$Accuracy_TEST) #r = 0.38, t = 3.37, df = 68, p-value = 0.001237
+
+#check how many rows are left:
+dim(rdata_DEV_TEST_accuracy) #70 rows left
+
+#reshape to a long data format for ggplot:
+rdata_DEV_TEST_accuracy_long <- rdata_DEV_TEST_accuracy %>%
+  pivot_longer(cols = c(Accuracy_DEV, Accuracy_TEST), 
+               names_to = "Phase", 
+               values_to = "Accuracy")
+#dim(rdata_DEV_TEST_accuracy_long) #140
+#names(rdata_DEV_TEST_accuracy_long)
+
+#use rdata_DEV_TEST_accuracy_long to plot geom_histogram by Phase:
+ggplot(rdata_DEV_TEST_accuracy_long, aes(x = Accuracy, fill = Phase)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 5) +
+  labs(title = "Distribution of Accuracy scores in DEV and TEST phases",
+       x = "Accuracy",
+       y = "Count") +
+  scale_fill_manual(values = c("#f0e442", "#404080"), 
+                    labels = c("Accuracy_DEV" = "DEV Phase", "Accuracy_TEST" = "TEST Phase")) +
+  theme_classic() +
+  theme(legend.position = "top")
+
+#Export figure to a png file:
+ggsave(filename = here("plots", "accuracy_DEV_vs_TEST.png"), width = 8, height = 6, dpi = 300)
+```
+
+
+Success by variable type?
+
+```{r}
+table(rdata_TEST$Answer_structure_type, rdata_TEST$Success) # 1 = success (half of categorical variables failed)
+
+#percent of how many variables were successful per Answer_structure_type:
+rdata_TEST %>%
+  group_by(Answer_structure_type) %>%
+  summarise(Success_rate = sum(Success)/n()) %>%
+  mutate(Success_rate = round(Success_rate, 2))
+  
+#statistical test for counts in rdata_TEST$Success vs rdata_TEST$Answer_structure_type:
+chisq.test(table(rdata_TEST$Success, rdata_TEST$Answer_structure_type)) #X-squared = 3.8777, df = 3, p-value = 0.275
+```
+
+Accuracy by variable type?
+
+```{r}
+#check the level of Accuracy overall:
+min(rdata_TEST$Accuracy)
+max(rdata_TEST$Accuracy)
+mean(rdata_TEST$Accuracy)
+median(rdata_TEST$Accuracy)
+  
+#table  of Accuracy per Variable type:
+rdata_TEST %>%
+  group_by(Answer_structure_type) %>%
+  summarise(Min_A = min(as.numeric(Accuracy)),
+            Max_A = max(as.numeric(Accuracy)),
+            Mean_A = mean(as.numeric(Accuracy)),
+            Median_A = median(as.numeric(Accuracy)),
+            ) -> accuracy_per_type_TEST
+
+#plot  of Accuracy values per Variable_type in rdata_TEST using geom_histogram:
+ggplot(rdata_TEST, aes(x = Accuracy, fill = Answer_structure_type)) +
+  geom_histogram(position = "identity", alpha = 0.4, bins = 5) +
+  labs(title = "Distribution of Accuracy scores by Variable Type in TEST phase",
+       x = "Accuracy",
+       y = "Count") +
+  scale_fill_manual(values = c("#88ccee", "#882255", "#ddcc77", "#204080"), 
+                    labels = c("Categorical" = "Categorical", "Yes/No" = "Yes/No", "Number" = "Number", "Name/Other" = "Name/Other")) +
+  theme_classic() +
+  theme(legend.position = "top")
+```
+
+
+Accuracy by Column_name and Review:  
+
+```{r}
+
+### Figure 4
+
+#create a heatmap-style grid plot using Column_name as y-axis (ordered by overall success rate) and Review as x-axis, with Accuracy as fill color:
+rdata_TEST %>%
+  group_by(Column_name, Review) %>%
+  summarise(Accuracy = max(Accuracy)) %>%
+  ungroup() -> rdata_TEST_accuracy
+
+#order Column_name by overall accuracy rate:
+rdata_TEST_accuracy$Column_name <- factor(rdata_TEST_accuracy$Column_name, 
+                                     levels = rdata_TEST_accuracy %>%
+                                       group_by(Column_name) %>%
+                                       summarise(Accuracy_rate = mean(Accuracy)) %>%
+                                       arrange(desc(Accuracy_rate)) %>%
+                                       pull(Column_name))
+
+#create a new variable Review_ref by substituting "_" symbol in Review variable by " et al. ":
+rdata_TEST_accuracy <- rdata_TEST_accuracy %>%  mutate(Review_ref = gsub("_", " et al. ", Review))
+
+#make a heatmap-style grid plot:
+ggplot(rdata_TEST_accuracy, aes(x = Review_ref, y = Column_name, fill = Accuracy*100)) +  # Set color gradient and modify legend title
+  geom_tile(color = "white") +
+  scale_fill_gradient(low = "#88ccee", high = "#332288", name = "Extraction accuracy (%): ") +
+  labs(title = "",
+       x = "Review",
+       y = "Variable") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1)) + # Rotate x-axis labels
+  theme(legend.position = "top") + #place legend at the top of the plot
+  theme(legend.key.width = unit(1.9, "cm"), legend.key.height = unit(0.2, "cm"))  # Modify legend key width
+
+
+#Export figure to a png file:
+ggsave(filename = here("plots", "accuracy_per_variable_review_TEST.png"), width = 10, height = 8, dpi = 300, scale = 0.8)
+```
+
+
+
+## Summary of results for the partial re-extractions of the GOLD STANDARD variables 
+
+Human double-extractions for the variables that were not present in the original reviews.
+They can be used to compare accuracy between human (human-human) and Elicit extractions (human-Elicit).
+
+
+## Process new Gold Standard answers
+
+Process new manually-extracted values for Gold Standard data set of 8 variables that were not originally present in the reviews and thus are not ammong the variables in the original data sets that were used as a gold standard (which were originally already fouble-extracted or cross-checked).
+
+Goldstandard1_value and Goldstandard2_value are values coded independently by two human extractors. 
+Consensus_value is a consensus value based on the two human extractors' values, derived after checking mismatched values against the study text.
+
+```{r }
+newdata_GS <- read.csv(here("data_raw", "Elicit_reextractions_GoldStandards_wide.csv"))
+
+# remove a Yang_2024 x "Funding sources" combination because it was not used in the TEST set:
+newdata_GS <- newdata_GS %>%
+  filter(!(Review == "Yang_2024" & Variable == "Funding sources"))
+
+#dim(newdata_GS) #416   15
+#names(newdata_GS) 
+
+length(unique(newdata_GS$Review)) #7  - number of reviews used
+length(unique(newdata_GS$Variable)) #7 - number of variables extracted
+length(unique(newdata_GS$NR)) #16 - study number (16 per Review)
+length(unique(newdata_GS$SET)) #2: DEV and TEST (8 papers each per review)
+length(unique(newdata_GS$Filename)) #111 filenames = codes for studies used within reviews
+
+#change all values in Goldstandard1_value, Goldstandard2_value and Consensus_value columns to lower case using mutate finction:
+newdata_GS <- newdata_GS %>%
+  mutate(
+    Goldstandard1_value = tolower(Goldstandard1_value),
+    Goldstandard2_value = tolower(Goldstandard2_value),
+    Consensus_value = tolower(Consensus_value)
+  )
+
+#in Goldstandard1_value, Goldstandard2_value and Consensus_value columns replace "not declared specifically" with "no" using mutate function:
+newdata_GS <- newdata_GS %>%
+  mutate(
+    Goldstandard1_value = ifelse(Goldstandard1_value == "not declared specifically", "no", Goldstandard1_value),
+    Goldstandard2_value = ifelse(Goldstandard2_value == "not declared specifically", "no", Goldstandard2_value),
+    Consensus_value = ifelse(Consensus_value == "not declared specifically", "no", Consensus_value)
+  )
+
+
+#Create new column comparing values in newdata_GS$Goldstandard1_value to newdata_GS$Goldstandard2_value:
+newdata_GS <- newdata_GS %>%
+  mutate(
+    Match = Goldstandard1_value == Goldstandard2_value
+  )
+
+#Change Match to 0 1 values
+newdata_GS <- newdata_GS %>%
+  mutate(Match = ifelse(Match == TRUE, 1, 0))
+
+#summarise mismatches from human assessment:
+table(newdata_GS$Match, useNA = "always") #only 6 mismatches between goldstandard1 and goldstandard2
+
+table(newdata_GS$Match, newdata_GS$SET) #table of matches per SET: 2 mismatch in DEV, 4 mismatches in TEST
+
+#as percentage: 
+round(table(newdata_GS$Match, useNA = "always")/length(newdata_GS$Match) * 100, 1) #98.6% accuracy, 1.4% human mismatches
+
+#check in which variables there are mismatches:
+# newdata_GS %>%
+#   filter(Success == FALSE) %>%
+#   group_by(Variable) %>% select(Review, Filename, Variable) #  View() 
+```
+
+
+Get accuracy rate for the same set of variables from the main TEST phase:
+
+```{r}
+#left join prepare newdata_GS TEST results by making a table with number of matches, mismatches and Accuracy for each combination fo Review and Variable:
+newdata_GS %>%
+  filter (SET == "TEST") %>% #only TEST set
+  group_by(Review, Variable) %>%
+  summarise(Match = sum(Match),
+            N = n(),
+            Accuracy = sum(Match)/n()) -> newdata_GS_TEST
+
+#dim(newdata_GS_TEST) #26 rows = variables
+sum(newdata_GS_TEST$N) - sum(newdata_GS_TEST$Match) #4 mismatches in total in TEST set
+
+names(newdata_GS_TEST)
+newdata_GS_TEST %>%
+  rename(N_correct = Match,
+         Column_name = Variable) -> newdata_GS_TEST
+
+#join by Review and Column_name:
+newdata_GS_TEST %>%
+  left_join(rdata_TEST, by = c("Review", "Column_name")) -> newdata_GS_TEST_merged
+#names(newdata_GS_TEST_merged)
+
+#in column names replace .x with "human" and .y with "Elicit" using gsub:
+newdata_GS_TEST_merged <- newdata_GS_TEST_merged %>%
+  rename_with(~ gsub("\\.x", "_human", .), ends_with(".x")) %>%
+  rename_with(~ gsub("\\.y", "_Elicit", .), ends_with(".y"))
+
+sum(newdata_GS_TEST_merged$N)  #208 extracted values in the data subset
+sum(8 - newdata_GS_TEST_merged$N_correct_human) #number of human mismatches 4/208 = 1.9%
+sum(8 - newdata_GS_TEST_merged$N_correct_Elicit) #number of Elicit mismatches 22/208 = 10.6%
+
+x <- matrix(c(sum(newdata_GS_TEST_merged$N_correct_human),
+            sum(newdata_GS_TEST_merged$N_correct_Elicit),
+            sum(8 - newdata_GS_TEST_merged$N_correct_human),
+            sum(8 - newdata_GS_TEST_merged$N_correct_Elicit)), ncol = 2)
+#statistical test for counts of matches and mismatches :
+chisq.test(x) #Pearson's Chi-squared test with Yates' continuity correction X-squared = 11.856, df = 1, p-value = 0.0005746
+
+#add a new column with the difference between human and Elicit accuracy:
+newdata_GS_TEST_merged <- newdata_GS_TEST_merged %>%
+  mutate(Difference = N_correct_human - N_correct_Elicit)
+#check the new data frame:
+table(newdata_GS_TEST_merged$Difference)  # positive values are how many more mistakes were made by Elicit per variable, negative value is when Elicit was more correct than human
+
+#show for which variable and review Difference is -1 (Elicit more correct):
+newdata_GS_TEST_merged %>%
+  filter(Difference < 0) %>%
+  select(Review, Column_name, N_correct_human, N_correct_Elicit, Difference) #View() #only one variable was more correct by Elicit than human
+
+#summarise Difference by Column name:
+newdata_GS_TEST_merged %>%
+  group_by(Column_name) %>%
+  summarise(Mean_Difference = mean(Difference, na.rm = TRUE),
+            Median_Difference = median(Difference, na.rm = TRUE),
+            Min_Difference = min(Difference, na.rm = TRUE),
+            Max_Difference = max(Difference, na.rm = TRUE)) -> summary_difference
+
+#do nonparametric paired test on N_correct_human and N_correct_Elicit
+wilcox.test(newdata_GS_TEST_merged$N_correct_human, newdata_GS_TEST_merged$N_correct_Elicit, paired = TRUE) #V = 87, p-value 0.003344 - significant difference between human and Elicit accuracy, but too many ties for this test to be accurate!
+
+#save newdata_GS_TEST_merged to .csv file in porcessed_data folder:
+write.csv(newdata_GS_TEST_merged, here("data_processed", "newdata_GS_TEST_merged.csv"), row.names = FALSE)
+```
+
+
+
+## Summary of results for the first re-test set (TEST vs RETEST)
+
+Results of re-testing using different user accounts in Elicit.
+
+NOTE: use raw .csv files exported from Elicit, as this way we can test if exactly the same variables were extracted as in the original TEST set, and if the results are consistent.
+
+
+### Load and prepare TEST raw data:
+
+```{r}
+#Load and merge all files from the 1_TEST_data_raw sub-directory and merge them into a single dataframe with first column showing file name:
+temp <- list.files(here("data_raw/1_TEST_data_raw"), full.names = FALSE, pattern = "\\.csv$", )  #70 files
+#temp
+#remove values starting with  "~$" from values in temp:
+temp <- temp[!grepl("^~\\$", temp)] #remove temporary files starting with ~$
+
+data_raw_colnames <- readr::read_csv(here("data_raw/1_TEST_data_raw", temp[1]), id = "file_name", col_names = FALSE, n_max = 1) #only 1st line (column names) from the first file
+data_raw_TEST <- readr::read_csv(here("data_raw/1_TEST_data_raw", temp), id = "file_name", col_names = FALSE, skip = 1) #skip 1st line (column names) to avoid conflicts in column 9 (name of extracted variable)
+rm(temp) #remove the temp data object
+
+dim(data_raw_TEST) #560  13
+names(data_raw_TEST) <- c("File_name", "Title", "Authors", "DOI","DOI_link", "Venue", "Citation count", "Year", "Filename", "Extracted_value", "Supporting_quotes", "Supporting_tables", "Reasoning")
+
+# #add SET column with value "TEST" to data_raw_TEST:
+# data_raw_TEST <- data_raw_TEST %>%
+#   mutate(SET = "TEST")
+# table(data_raw_TEST$SET) #560
+
+#table(data_raw_TEST$File_name) #needs cleaning 
+
+#remove all string before last / from File_name:
+data_raw_TEST <- data_raw_TEST %>%
+  mutate(File_name = sub(".*\\/", "", File_name)) #remove all string before last / from File_name
+#table(data_raw_TEST$File_name) #ok
+
+#add Review column by extracting string before "_TEST_Elicit" from the File_name column:
+data_raw_TEST <- data_raw_TEST %>%
+  mutate(Review = sub("_TEST_Elicit.*", "", File_name))
+#table(data_raw_TEST$Review) #ok
+
+#add Variable_name column by extracting string after "- " from the File_name column:
+data_raw_TEST <- data_raw_TEST %>%
+  mutate(Variable_name = sub(".*- ", "", File_name)) %>%
+  mutate(Variable_name = sub("\\.csv$", "", Variable_name)) #remove .csv st the end of Variable_name:
+#table(data_raw_TEST$Variable_name) # ok
+#dim(table(data_raw_TEST$Variable_name)) # 42 unique variable names out of 70 extracted variables 
+
+#dim(data_raw_TEST) #560  16
+#names(data_raw_TEST) 
+
+#check how many unique values within each column of TEST data set:
+length(unique(data_raw_TEST$File_name)) #70 unique File_names
+length(unique(data_raw_TEST$Title)) #56 unique study Title - ok
+length(unique(data_raw_TEST$DOI)) #only "-" = empty\
+length(unique(data_raw_TEST$DOI_link)) #only "-" = empty
+length(unique(data_raw_TEST$Venue)) #31 - partially missing
+length(unique(data_raw_TEST$"Citation count")) #39 - partially missing
+length(unique(data_raw_TEST$Year)) #19 - partially missing
+length(unique(data_raw_TEST$Filename)) #56 - study codes - ok
+length(unique(data_raw_TEST$Extracted_value)) #158
+#length(unique(data_raw_TEST$SET)) #1
+length(unique(data_raw_TEST$Review)) #7
+length(unique(data_raw_TEST$Variable_name)) #42
+
+#remove empty or non-informative columns from data_raw_TEST:
+data_raw_TEST <- data_raw_TEST %>%
+  select(-c(DOI, DOI_link, Venue, "Citation count", Year, Authors, Title, Supporting_tables))
+#Rename column Filename to StudyID:  
+data_raw_TEST <- data_raw_TEST %>%  rename(StudyID = Filename) 
+length(unique(data_raw_TEST$StudyID)) #56 - ok
+#table(data_raw_TEST$StudyID)
+#dim(data_raw_TEST) #560  11
+```
+
+
+### Load and prepare RETEST raw data (retesting on a different user account):
+
+```{r}
+#Load and merge all files from the 2_RETEST_data_raw sub-directory and merge them into a single dataframe with first column showing file name:
+temp <- list.files(here("data_raw/2_RETEST_data_raw"), full.names = FALSE, pattern = "\\.csv$", )  #70 files
+
+data_raw_colnames <- readr::read_csv(here("data_raw/2_RETEST_data_raw", temp[1]), id = "file_name", col_names = FALSE, n_max = 1) #only 1st line (column names) from the first file
+data_raw_RETEST <- readr::read_csv(here("data_raw/2_RETEST_data_raw", temp), id = "file_name", col_names = FALSE, skip = 1) #skip 1st line (column names) to avoid conflicts in column 9 (name of extracted variable)
+rm(temp) #remove the temp data object
+
+#dim(data_raw_RETEST)
+
+names(data_raw_RETEST) <- c("File_name", "Title", "Authors", "DOI","DOI_link", "Venue", "Citation count", "Year", "Filename", "Extracted_value", "Supporting_quotes", "Supporting_tables", "Reasoning")
+
+#table(data_raw_RETEST$File_name) #needs cleaning 
+
+#remove all string before last / from File_name:
+data_raw_RETEST <- data_raw_RETEST %>%
+  mutate(File_name = sub(".*\\/", "", File_name)) #remove all string before last / from File_name
+#table(data_raw_RETEST$File_name) #ok
+
+#add Review column by extracting string before "_Elicit_RETEST." from the File_name column:
+data_raw_RETEST <- data_raw_RETEST %>%
+  mutate(Review = sub("_Elicit_RETEST.*", "", File_name))
+table(data_raw_RETEST$Review) #ok
+
+#add Variable_name column by extracting string after "- " from the File_name column:
+data_raw_RETEST <- data_raw_RETEST %>%
+  mutate(Variable_name = sub(".*- ", "", File_name)) %>%
+  mutate(Variable_name = sub("\\.csv$", "", Variable_name)) #remove .csv st the end of Variable_name:
+table(data_raw_RETEST$Variable_name) # ok
+dim(table(data_raw_RETEST$Variable_name)) # 42 unique variable names out of 70 extracted variables
+
+#table(data_raw_RETEST$Filename)
+#dim(data_raw_RETEST) #560
+#names(data_raw_RETEST) 
+
+#check how many unique values within each column in TEST data set:
+# length(unique(data_raw_RETEST$File_name)) #70 unique File_names
+# length(unique(data_raw_RETEST$Title)) #57 unique study Title - some are missing (should be 70)
+# length(unique(data_raw_RETEST$DOI)) #only "-" = empty\
+# length(unique(data_raw_RETEST$DOI_link)) #only "-" = empty
+# length(unique(data_raw_RETEST$Venue)) #31 - partially missing
+# length(unique(data_raw_RETEST$"Citation count")) #40 - partially missing
+# length(unique(data_raw_RETEST$Year)) #31 - partially missing
+# length(unique(data_raw_RETEST$Filename)) #56 - study codes - ok
+# length(unique(data_raw_RETEST$Extracted_value)) #138
+# #length(unique(data_raw_RETEST$SET)) #1
+# length(unique(data_raw_RETEST$Review)) #7
+# length(unique(data_raw_RETEST$Variable_name)) #42
+
+#remove empty or non-informative columns from data_raw_RETEST:
+data_raw_RETEST <- data_raw_RETEST %>%
+  select(-c(DOI, DOI_link, Venue, "Citation count", Year, Authors, Title, Supporting_tables))
+#Rename column Filename to StudyID:  
+data_raw_RETEST <- data_raw_RETEST %>%  rename(StudyID = Filename)
+#length(unique(data_raw_RETEST$StudyID)) #56
+#table(data_raw_RETEST$StudyID)
+#dim(data_raw_RETEST) #560  11
+
+#check studyID overlap between datasets TEST and RETEST
+#length(intersect(unique(data_raw_TEST$StudyID), unique(data_raw_RETEST$StudyID))) #ok - 56 out of 56 overlap
+```
+
+
+
+### Compare TEST and RETEST data sets
+
+Match these two data sets by Review, StudyID and Variable_name, to compare the results of the same extracted variables across different user accounts in Elicit.
+
+Prepare data frame with TEST and RETEST data sets merged together, with columns for TEST and RETEST values:
+
+```{r}
+#check if column names are the same:
+#names(data_raw_TEST) == names(data_raw_RETEST) 
+
+#left join data_raw_TEST and data_raw_RETEST by Review StudyID and Variable_name columns:
+data_raw_TEST %>% left_join(data_raw_RETEST, 
+          by = c("Review", "StudyID", "Variable_name")) -> data_raw_TEST_RETEST
+
+#dim(data_raw_TEST_RETEST) #560
+#names(data_raw_TEST_RETEST) 
+
+#in column names replace .x at the end with TEST and .y with RETEST using gsub:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  rename_with(~ gsub("\\.x", "_TEST", .), ends_with(".x")) %>%
+  rename_with(~ gsub("\\.y", "_RETEST", .), ends_with(".y"))
+#names(data_raw_TEST_RETEST)  
+
+#change selected character columns to lower case to compare values not case-sensitively:
+data_raw_TEST_RETEST$Extracted_value_TEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Extracted_value_TEST)
+data_raw_TEST_RETEST$Extracted_value_RETEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Extracted_value_RETEST)
+data_raw_TEST_RETEST$Supporting_quotes_TEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Supporting_quotes_TEST)
+data_raw_TEST_RETEST$Supporting_quotes_RETEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Supporting_quotes_RETEST)
+data_raw_TEST_RETEST$Reasoning_TEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Reasoning_TEST)
+data_raw_TEST_RETEST$Reasoning_RETEST <- stringi::stri_trans_tolower(data_raw_TEST_RETEST$Reasoning_RETEST)
+#dim(data_raw_TEST_RETEST)
+
+#create a new data_raw_TEST_RETEST by joining Review and Column_name:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Review_Variable = paste(Review, Variable_name, sep = "_"))
+length(table(data_raw_TEST_RETEST$Review_Variable))
+
+#NOTE: 3 variables failed in RETEST due to human mistake when setting up Elicit prompts - exclude these from the data set.
+#names(rdata_RETEST)
+#in the rdata_RETEST data set, find rows that have 1 in the Censor column and display its Column_name and Review_Variable:
+rdata_RETEST %>%
+  filter(Censor == "1") %>%
+  select(Review, Column_name, Review_Variable, Accuracy) #View() #3 variables failed in RETEST due to human mistake when setting up Elicit prompts - Review_Variable: "Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species"
+
+#remove these 3 variables from the data_raw_TEST_RETEST data set:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  filter(!(Review_Variable %in% c("Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species")))
+#dim(data_raw_TEST_RETEST) #536 rows left
+```
+
+Compare extracted variable values:
+
+```{r}
+#check if Extracted_value_TEST and Extracted_value_RETEST match:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_extracted_value = Extracted_value_TEST == Extracted_value_RETEST)
+
+#simple table of matches, mismatched and missing value:
+#table(data_raw_TEST_RETEST$Match_extracted_value, useNA = "always") #table of matches
+
+#change Match_extracted_value from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_extracted_value = ifelse(Match_extracted_value == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Extracted_value_TEST or Extracted_value_RETEST:
+table(is.na(data_raw_TEST_RETEST$Extracted_value_TEST), is.na(data_raw_TEST_RETEST$Extracted_value_RETEST)) 
+#table of NAs: 10 rows have NA in both columns, 1 row has one NA 
+
+#change Match_extracted_value to "one missing" if only one of  Extracted_value_TEST or Extracted_value_RETEST is NA:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_extracted_value = ifelse(is.na(Extracted_value_TEST) | is.na(Extracted_value_RETEST), "one missing", Match_extracted_value))
+
+#change Match_extracted_value to "both missing" if both Extracted_value_TEST and Extracted_value_RETEST is NA:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_extracted_value = ifelse(is.na(Extracted_value_TEST) & is.na(Extracted_value_RETEST), "both missing", Match_extracted_value))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_RETEST$Match_extracted_value, useNA = "always")
+
+# Specify the factor levels order:
+data_raw_TEST_RETEST$Match_extracted_value <- factor(data_raw_TEST_RETEST$Match_extracted_value, levels = rev(c("match", "mismatch", "both missing", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_RETEST$Match_extracted_value:
+p1_RETEST <- ggplot(data_raw_TEST_RETEST, aes(x = "", fill = Match_extracted_value)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit extractions of TEST vs RETEST values:",
+       y = "Count", x = "Values") +
+  scale_fill_manual(limits = (c("match", "mismatch", "both missing", "one missing")), 
+                    values = rev(c("#000000", "#777777", "#cc79a7", "#0072b2")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing", "both missing" = "Both missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top") +
+  theme(legend.title=element_blank()) #remove legend title
+
+# #Show rows with one NAs in Match_extracted_value:
+# data_raw_TEST_RETEST %>%
+#  filter(Match_extracted_value == "one missing") %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_RETEST) #%>% View() #Mizuno_2024 - many NA for bird sex and age Elicit could not extract (correct NA values), except Mizuno_2024	Stevens_2007.pdf	Bird sex  - which should be coded as "both" as in TEST but missed in RETEST
+#  
+# #Show rows with two NAs in Match_extracted_value:
+# data_raw_TEST_RETEST %>%
+#  filter(Match_extracted_value == "both missing") %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_RETEST) #%>% View() #Mizuno_2024 - many NA for bird sex and age Elicit could not extract (correct NA values), except Mizuno_2024	Stevens_2007.pdf	Bird sex  - which should be coded as "both" as in TEST but missed in RETEST
+#   
+# #Show rows with FALSE in Match_extracted_value:
+# data_raw_TEST_RETEST %>%
+#   filter(Match_extracted_value == FALSE) %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_RETEST) #%>% View() #some human mistakes when setting up the prompts
+  
+#Export all mismatched and empty rows and manually classify reasons and save as a supplementary table:
+data_raw_TEST_RETEST %>%
+  filter(Match_extracted_value == "mismatch" | (StudyID == "Stevens_2007.pdf" & Variable_name == "Bird sex")) %>%
+  select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_RETEST) -> mismatched_values
+dim(mismatched_values) #50 rows with mismatched or empty values
+
+#Export mismatched_values to a csv file:
+write.csv(mismatched_values, here("data_processed", "mismatched_NA_values_TEST_RETEST.csv"), row.names = FALSE)
+
+#Load manually classified reasons for mismatches:
+mismatched_values_classified <- read.csv(here("data_processed", "mismatched_NA_values_TEST_RETEST_ML.csv"))
+dim(mismatched_values_classified) #50
+names(mismatched_values_classified)
+
+table(mismatched_values_classified$Category) #table of reasons for mismatches: 
+# correct but different wording/format  = 14 
+# Elicit interpretation error = 36 
+
+table(mismatched_values_classified$Reason) #table of reasons for mismatches: 
+# different wording, correct  = 15
+# RETEST incorrect = 19
+# TEST incorrect = 10
+# TEST and RETEST incorrect = 6
+
+#NOTE: any incorrect are 19+10+6 out of 536 rows in data_raw_TEST_RETEST, 
+# (19+10+6)/536 # 0.06529851 = 7% of records (this does not include incorrect answers that were matching between TEST and RETEST).
+
+#make a horizontal stackedbar plot for mismatched_values_classified$Reason:
+p2_RETEST <- ggplot(mismatched_values_classified, aes(x = "", fill = Reason)) +
+  geom_bar(width = 1) +
+  labs(title = "Reasons for TEST-RETEST extracted values mismatches:", y = "Count", x = "Values") +
+  scale_fill_discrete(limits = rev(levels(factor(mismatched_values_classified$Reason))), type = rev(c("#88ccee", "#482255", "#882255", "#aa4499"))) +   #reverse order of the legend and set fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  #add percentages inside bar in white font:
+  geom_text(stat = "count", aes(label = paste0(round(..count../sum(..count..) * 100, 1), "%")), 
+            position = position_stack(vjust = 0.5), color = "white") +
+    theme(legend.position = "top") +
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+
+Compare supporting quotes :
+
+```{r}
+#check if Supporting_quotes_TEST and Supporting_quotes_RETEST match:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_supporting_quotes = Supporting_quotes_TEST == Supporting_quotes_RETEST)
+
+#simple table of matches, mismatched and missing value:
+#table(data_raw_TEST_RETEST$Match_supporting_quotes, useNA = "always")
+
+#change Match_supporting_quotes from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_supporting_quotes = ifelse(Match_supporting_quotes == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Supporting_quotes_TEST or Supporting_quotes_RETEST:
+table(is.na(data_raw_TEST_RETEST$Supporting_quotes_TEST), is.na(data_raw_TEST_RETEST$Supporting_quotes_RETEST)) 
+
+#change Match_extracted_value to "one missing" if only one of  Supporting_quotes_TEST or Supporting_quotes_RETEST is NA:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_supporting_quotes = ifelse(is.na(Supporting_quotes_TEST) | is.na(Supporting_quotes_RETEST), "one missing", Match_supporting_quotes))
+
+#change Match_supporting_quotes to "both missing" if both Supporting_quotes_TEST and Supporting_quotes_RETEST is NA:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_supporting_quotes = ifelse(is.na(Supporting_quotes_TEST) & is.na(Supporting_quotes_RETEST), "both missing", Match_supporting_quotes))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_RETEST$Match_supporting_quotes, useNA = "always") #table of matches: 475 matches (TRUE; 85%), 73 mismatches (FALSE), 11 NAs
+
+# Specify the factor levels order:
+data_raw_TEST_RETEST$Match_supporting_quotes <- factor(data_raw_TEST_RETEST$Match_supporting_quotes, levels = rev(c("match", "mismatch", "both missing", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_RETEST$Match_supporting_quotes:
+p3_RETEST <- ggplot(data_raw_TEST_RETEST, aes(x = "", fill = Match_supporting_quotes)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit supporting quotes for TEST-RETEST extractions:",
+       y = "Count", x = "Quotes") +
+  scale_fill_manual(limits = (c("match", "mismatch", "both missing", "one missing")), 
+                    values = rev(c( "#777777", "#000000", "#cc79a7", "#0072b2")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing", "both missing" = "Both missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top")+
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+
+Compare reasoning:
+
+```{r}
+#check if Reasoning_TEST and Reasoning_RETEST match:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_reasoning = Reasoning_TEST == Reasoning_RETEST)
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_RETEST$Match_reasoning, useNA = "always") 
+
+#change Match_reasoning from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_reasoning = ifelse(Match_reasoning == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Reasoning_TEST or Reasoning_RETEST:
+table(is.na(data_raw_TEST_RETEST$Reasoning_TEST), is.na(data_raw_TEST_RETEST$Reasoning_RETEST)) 
+#table of NAs: 1 row has one NA 
+
+#change Match_extracted_value to "one missing" if only one of  Reasoning_TEST or Reasoning_RETEST is NA:
+data_raw_TEST_RETEST <- data_raw_TEST_RETEST %>%
+  mutate(Match_reasoning = ifelse(is.na(Reasoning_TEST) | is.na(Reasoning_RETEST), "one missing", Match_reasoning))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_RETEST$Match_reasoning, useNA = "always") 
+
+# Specify the factor levels order:
+data_raw_TEST_RETEST$Match_reasoning <- factor(data_raw_TEST_RETEST$Match_reasoning, levels = rev(c("match", "mismatch", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_RETEST$Match_reasoning:
+p4_RETEST <- ggplot(data_raw_TEST_RETEST, aes(x = "", fill = Match_reasoning)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit reasonings for TEST-RETEST extractions:",
+       y = "Count", x = "Reasoning") +
+  scale_fill_manual(limits = (c("match", "mismatch", "one missing")), 
+                    values = rev(c("#777777", "#cc79a7", "#0072b2")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top")+
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+Create a 4-panel plot:
+
+```{r}
+
+### Figure 5
+
+#Create a 2 by 2 plot with p1 p2, p3 and p4 as panels:
+combined_plot_RETEST <- (p1_RETEST + p2_RETEST + p3_RETEST + p4_RETEST) +
+    plot_layout(ncol = 1, nrow = 4) +
+    plot_annotation(tag_levels = 'A') +
+    theme(plot.tag = element_text(face = 'bold'))
+
+#Save the combined plot to a file:
+ggsave(here("plots", "TEST_RETEST_results.png"), combined_plot_RETEST, width = 10, height = 10, dpi = 300, scale = 0.8)
+```
+
+
+
+##  Summary of results for the second re-test set in high-accuracy mode(HATEST)
+
+Re-testing usng same Elicit account but at a different time point with high-accuracy enabled enabled. 
+
+### Load and prepare HATEST raw data (retesting on a different user account):
+
+```{r}
+#Load and merge all files from the 3_HATEST_data_raw sub-directory and merge them into a single dataframe with first column showing file name:
+temp <- list.files(here("data_raw/3_HATEST_data_raw"), full.names = FALSE, pattern = "\\.csv$", )  #70 files
+
+data_raw_colnames <- readr::read_csv(here("data_raw/3_HATEST_data_raw", temp[1]), id = "file_name", col_names = FALSE, n_max = 1) #only 1st line (column names) from the first file
+data_raw_HATEST <- readr::read_csv(here("data_raw/3_HATEST_data_raw", temp), id = "file_name", col_names = FALSE, skip = 1) #skip 1st line (column names) to avoid conflicts in column 9 (name of extracted variable)
+rm(temp) #remove the temp data object
+
+#dim(data_raw_HATEST)
+
+names(data_raw_HATEST) <- c("File_name", "Title", "Authors", "DOI","DOI_link", "Venue", "Citation count", "Year", "Filename", "Extracted_value", "Supporting_quotes", "Supporting_tables", "Reasoning")
+
+#table(data_raw_HATEST$File_name) #needs cleaning 
+
+#remove all string before last / from File_name:
+data_raw_HATEST <- data_raw_HATEST %>%
+  mutate(File_name = sub(".*\\/", "", File_name)) #remove all string before last / from File_name
+#table(data_raw_HATEST$File_name) #ok
+
+#add Review column by extracting string before "_Elicit_HATEST." from the File_name column:
+data_raw_HATEST <- data_raw_HATEST %>%
+  mutate(Review = sub("_Elicit_HATEST.*", "", File_name))
+table(data_raw_HATEST$Review) #ok
+
+#add Variable_name column by extracting string after "- " from the File_name column:
+data_raw_HATEST <- data_raw_HATEST %>%
+  mutate(Variable_name = sub(".*- ", "", File_name)) %>%
+  mutate(Variable_name = sub("\\.csv$", "", Variable_name)) #remove .csv st the end of Variable_name:
+table(data_raw_HATEST$Variable_name) # ok
+dim(table(data_raw_HATEST$Variable_name)) # 42 unique variable names out of 70 extracted variables
+
+#table(data_raw_HATEST$Filename)
+#dim(data_raw_HATEST) #560
+#names(data_raw_HATEST) 
+
+#check how many unique values within each column in TEST data set:
+# length(unique(data_raw_HATEST$File_name)) #70 unique File_names
+# length(unique(data_raw_HATEST$Title)) #57 unique study Title - some are missing (should be 70)
+# length(unique(data_raw_HATEST$DOI)) #only "-" = empty\
+# length(unique(data_raw_HATEST$DOI_link)) #only "-" = empty
+# length(unique(data_raw_HATEST$Venue)) #31 - partially missing
+# length(unique(data_raw_HATEST$"Citation count")) #40 - partially missing
+# length(unique(data_raw_HATEST$Year)) #31 - partially missing
+# length(unique(data_raw_HATEST$Filename)) #56 - study codes - ok
+# length(unique(data_raw_HATEST$Extracted_value)) #138
+# #length(unique(data_raw_HATEST$SET)) #1
+# length(unique(data_raw_HATEST$Review)) #7
+# length(unique(data_raw_HATEST$Variable_name)) #42
+
+#remove empty or non-informative columns from data_raw_HATEST:
+data_raw_HATEST <- data_raw_HATEST %>%
+  select(-c(DOI, DOI_link, Venue, "Citation count", Year, Authors, Title, Supporting_tables))
+#Rename column Filename to StudyID:  
+data_raw_HATEST <- data_raw_HATEST %>%  rename(StudyID = Filename)
+#length(unique(data_raw_HATEST$StudyID)) #56
+#table(data_raw_HATEST$StudyID)
+#dim(data_raw_HATEST) #560  11
+
+#check studyID overlap between datasets TEST and HATEST
+#length(intersect(unique(data_raw_TEST$StudyID), unique(data_raw_HATEST$StudyID))) #ok - 56 out of 56 overlap
+```
+
+
+
+### Compare TEST and HATEST data sets
+
+Match these two data sets by Review, StudyID and Variable_name, to compare the results of the same extracted variables across different user accounts in Elicit.
+
+Prepare data frame with TEST and HATEST data sets merged together, with columns for TEST and HATEST values:
+
+```{r}
+#check if column names are the same:
+#names(data_raw_TEST) == names(data_raw_HATEST) 
+
+#left join data_raw_TEST and data_raw_HATEST by Review StudyID and Variable_name columns:
+data_raw_TEST %>% left_join(data_raw_HATEST, 
+          by = c("Review", "StudyID", "Variable_name")) -> data_raw_TEST_HATEST
+
+#dim(data_raw_TEST_HATEST) #560
+#names(data_raw_TEST_HATEST) 
+
+#in column names replace .x at the end with TEST and .y with HATEST using gsub:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  rename_with(~ gsub("\\.x", "_TEST", .), ends_with(".x")) %>%
+  rename_with(~ gsub("\\.y", "_HATEST", .), ends_with(".y"))
+#names(data_raw_TEST_HATEST)  
+
+#change selected character columns to lower case to compare values not case-sensitively:
+data_raw_TEST_HATEST$Extracted_value_TEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Extracted_value_TEST)
+data_raw_TEST_HATEST$Extracted_value_HATEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Extracted_value_HATEST)
+data_raw_TEST_HATEST$Supporting_quotes_TEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Supporting_quotes_TEST)
+data_raw_TEST_HATEST$Supporting_quotes_HATEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Supporting_quotes_HATEST)
+data_raw_TEST_HATEST$Reasoning_TEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Reasoning_TEST)
+data_raw_TEST_HATEST$Reasoning_HATEST <- stringi::stri_trans_tolower(data_raw_TEST_HATEST$Reasoning_HATEST)
+#dim(data_raw_TEST_HATEST)
+
+#create a new data_raw_TEST_HATEST by joining Review and Column_name:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Review_Variable = paste(Review, Variable_name, sep = "_"))
+length(table(data_raw_TEST_HATEST$Review_Variable))
+
+#NOTE: 3 variables failed in HATEST due to human mistake when setting up Elicit prompts - exclude these from the data set.
+#names(rdata_HATEST)
+#in the rdata_HATEST data set, find rows that have 1 in the Censor column and display its Column_name and Review_Variable:
+rdata_HATEST %>%
+  filter(Censor == "1") %>%
+  select(Review, Column_name, Review_Variable, Accuracy) #View() #3 variables failed in HATEST due to human mistake when setting up Elicit prompts - Review_Variable: "Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species"
+
+#remove these 3 variables from the data_raw_TEST_HATEST data set:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  filter(!(Review_Variable %in% c("Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species")))
+#dim(data_raw_TEST_HATEST) #536 rows left
+```
+
+Compare extracted variable values:
+
+```{r}
+#check if Extracted_value_TEST and Extracted_value_HATEST match:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_extracted_value = Extracted_value_TEST == Extracted_value_HATEST)
+
+#simple table of matches, mismatched and missing value:
+#table(data_raw_TEST_HATEST$Match_extracted_value, useNA = "always") #table of matches
+
+#change Match_extracted_value from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_extracted_value = ifelse(Match_extracted_value == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Extracted_value_TEST or Extracted_value_HATEST:
+table(is.na(data_raw_TEST_HATEST$Extracted_value_TEST), is.na(data_raw_TEST_HATEST$Extracted_value_HATEST)) 
+#table of NAs: 9 rows have NA in both columns, 3 rows have one NA 
+
+#change Match_extracted_value to "one missing" if only one of  Extracted_value_TEST or Extracted_value_HATEST is NA:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_extracted_value = ifelse(is.na(Extracted_value_TEST) | is.na(Extracted_value_HATEST), "one missing", Match_extracted_value))
+
+#change Match_extracted_value to "both missing" if both Extracted_value_TEST and Extracted_value_HATEST is NA:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_extracted_value = ifelse(is.na(Extracted_value_TEST) & is.na(Extracted_value_HATEST), "both missing", Match_extracted_value))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_HATEST$Match_extracted_value, useNA = "always") #table of matches: 412 matches, 112 mismatches, 12 NAs
+
+# Specify the factor levels order:
+data_raw_TEST_HATEST$Match_extracted_value <- factor(data_raw_TEST_HATEST$Match_extracted_value, levels = rev(c("match", "mismatch", "both missing", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_HATEST$Match_extracted_value:
+p1_HATEST <- ggplot(data_raw_TEST_HATEST, aes(x = "", fill = Match_extracted_value)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit extractions of TEST vs HATEST values:",
+       y = "Count", x = "Values") +
+  scale_fill_manual(limits = (c("match", "mismatch", "both missing", "one missing")), 
+                    values = rev(c("#000000", "#777777", "#cc79a7", "#0072b2")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing", "both missing" = "Both missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top") +
+  theme(legend.title=element_blank()) #remove legend title
+
+# #Show rows with one NAs in Match_extracted_value:
+# data_raw_TEST_HATEST %>%
+#  filter(Match_extracted_value == "one missing") %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_HATEST) #%>% View() #Mizuno_2024 - many NA for bird sex and age Elicit could not extract (correct NA values), except Mizuno_2024	Stevens_2007.pdf	Bird sex  - which should be coded as "both" as in TEST but missed in HATEST
+#  
+# #Show rows with two NAs in Match_extracted_value:
+# data_raw_TEST_HATEST %>%
+#  filter(Match_extracted_value == "both missing") %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_HATEST) #%>% View() #Mizuno_2024 - many NA for bird sex and age Elicit could not extract (correct NA values), except Mizuno_2024	Stevens_2007.pdf	Bird sex  - which should be coded as "both" as in TEST but missed in HATEST
+#   
+# #Show rows with FALSE in Match_extracted_value:
+# data_raw_TEST_HATEST %>%
+#   filter(Match_extracted_value == FALSE) %>%
+#   select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_HATEST) #%>% View() #some human mistakes when setting up the prompts
+  
+#Export all mismatched and empty rows and manually classify reasons and save as a supplementary table:
+data_raw_TEST_HATEST %>%
+  filter(Match_extracted_value == "mismatch" | (StudyID == "Stevens_2007.pdf" & Variable_name == "Bird sex")) %>%
+  select(Review, StudyID, Variable_name, Extracted_value_TEST, Extracted_value_HATEST) -> mismatched_values
+dim(mismatched_values) #113 rows with mismatched or empty values
+
+#Export mismatched_values to a csv file:
+write.csv(mismatched_values, here("data_processed", "mismatched_NA_values_TEST_HATEST.csv"), row.names = FALSE)
+
+#Load manually classified reasons for mismatches:
+mismatched_values_classified <- read.csv(here("data_processed", "mismatched_NA_values_TEST_HATEST_ML.csv"))
+dim(mismatched_values_classified) #122
+names(mismatched_values_classified)
+
+table(mismatched_values_classified$Category) #table of Category for mismatches: 
+# correct but different wording/format  = 28 
+# Elicit interpretation error = 94 
+
+table(mismatched_values_classified$Reason) #table of Reasons for mismatches: 
+# different wording, correct  = 28
+# HATEST incorrect = 60
+# TEST incorrect = 26
+# TEST and HATEST incorrect = 8
+
+#NOTE: any incorrect are 60+26+8 out of 536 rows in data_raw_TEST_HATEST, 
+# (60+26+8)/536 # 0.1753731 = 18% of records (this does not include incorrect answers that were matching between TEST and HATEST).
+
+#make a horizontal stackedbar plot for mismatched_values_classified$Reason:
+p2_HATEST <- ggplot(mismatched_values_classified, aes(x = "", fill = Reason)) +
+  geom_bar(width = 1) +
+  labs(title = "Reasons for TEST-HATEST extracted values mismatches:", y = "Count", x = "Values") +
+  scale_fill_discrete(limits = rev(levels(factor(mismatched_values_classified$Reason))), type = rev(c("#88ccee", "#482255", "#882255", "#aa4499"))) +   #reverse order of the legend and set fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  #add percentages inside bar in white font:
+  geom_text(stat = "count", aes(label = paste0(round(..count../sum(..count..) * 100, 1), "%")), 
+            position = position_stack(vjust = 0.5), color = "white") +
+    theme(legend.position = "top") +
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+
+Compare supporting quotes :
+
+```{r}
+#check if Supporting_quotes_TEST and Supporting_quotes_HATEST match:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_supporting_quotes = Supporting_quotes_TEST == Supporting_quotes_HATEST)
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_HATEST$Match_supporting_quotes, useNA = "always")
+
+#change Match_supporting_quotes from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_supporting_quotes = ifelse(Match_supporting_quotes == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Supporting_quotes_TEST or Supporting_quotes_HATEST:
+table(is.na(data_raw_TEST_HATEST$Supporting_quotes_TEST), is.na(data_raw_TEST_HATEST$Supporting_quotes_HATEST)) 
+
+#change Match_extracted_value to "one missing" if only one of  Supporting_quotes_TEST or Supporting_quotes_HATEST is NA:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_supporting_quotes = ifelse(is.na(Supporting_quotes_TEST) | is.na(Supporting_quotes_HATEST), "one missing", Match_supporting_quotes))
+
+#change Match_supporting_quotes to "both missing" if both Supporting_quotes_TEST and Supporting_quotes_HATEST is NA:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_supporting_quotes = ifelse(is.na(Supporting_quotes_TEST) & is.na(Supporting_quotes_HATEST), "both missing", Match_supporting_quotes))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_HATEST$Match_supporting_quotes, useNA = "always") #table of matches: 51 matches, 412 mismatches, 74 missing
+
+# Specify the factor levels order:
+data_raw_TEST_HATEST$Match_supporting_quotes <- factor(data_raw_TEST_HATEST$Match_supporting_quotes, levels = rev(c("match", "mismatch", "both missing", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_HATEST$Match_supporting_quotes:
+p3_HATEST <- ggplot(data_raw_TEST_HATEST, aes(x = "", fill = Match_supporting_quotes)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit supporting quotes for TEST-HATEST extractions:",
+       y = "Count", x = "Quotes") +
+  scale_fill_manual(limits = (c("match", "mismatch", "both missing", "one missing")), 
+                    values = rev(c( "#777777", "#000000", "#cc79a7", "#0072b2")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing", "both missing" = "Both missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top")+
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+
+Compare reasoning:
+
+```{r}
+data_raw_TEST_HATEST$Reasoning_TEST <- gsub("[[:punct:][:blank:]]+", " ", data_raw_TEST_HATEST$Reasoning_TEST) #remove punctuation and white spaces to reduce dissimilarities due to different text formatting
+data_raw_TEST_HATEST$Reasoning_HATEST <- gsub("[[:punct:][:blank:]]+", " ", data_raw_TEST_HATEST$Reasoning_HATEST) #remove punctuation 
+
+#check if Reasoning_TEST and Reasoning_HATEST match:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_reasoning = Reasoning_TEST == Reasoning_HATEST)
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_HATEST$Match_reasoning, useNA = "always") #table of matches: 0 matches (TRUE), 535 mismatches (FALSE), 1 NA (at least one NA)
+
+#change Match_reasoning from FALSE to "mismatch" and TRUE to "match" for better readability:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_reasoning = ifelse(Match_reasoning == FALSE, "mismatch", "match"))
+
+#check how many rows have NA in either Reasoning_TEST or Reasoning_HATEST:
+table(is.na(data_raw_TEST_HATEST$Reasoning_TEST), is.na(data_raw_TEST_HATEST$Reasoning_HATEST)) 
+#table of NAs: 1 row has one NA 
+
+#change Match_extracted_value to "one missing" if only one of  Reasoning_TEST or Reasoning_HATEST is NA:
+data_raw_TEST_HATEST <- data_raw_TEST_HATEST %>%
+  mutate(Match_reasoning = ifelse(is.na(Reasoning_TEST) | is.na(Reasoning_HATEST), "one missing", Match_reasoning))
+
+#simple table of matches, mismatched and missing value:
+table(data_raw_TEST_HATEST$Match_reasoning, useNA = "always") 
+
+# Specify the factor levels order:
+data_raw_TEST_HATEST$Match_reasoning <- factor(data_raw_TEST_HATEST$Match_reasoning, levels = rev(c("mismatch", "one missing")))
+
+#make a horizontal stackedbar plot for data_raw_TEST_HATEST$Match_reasoning:
+p4_HATEST <- ggplot(data_raw_TEST_HATEST, aes(x = "", fill = Match_reasoning)) +
+  geom_bar(width = 1) +
+  labs(title = "Elicit reasonings for TEST-HATEST extractions:",
+       y = "Count", x = "Reasoning") +
+  scale_fill_manual(limits = (c("mismatch", "one missing")), 
+                    values = rev(c("#777777", "#cc79a7")), 
+                    name = "Extracted values:",
+                    labels = c("match" = "Match", "mismatch" = "Mismatch", "one missing" = "One missing")) +   #fill colors manually
+  theme_classic() +
+  coord_flip() + 
+  geom_text(stat = "count", aes(label = ifelse(count > 10, paste0(round(..count../sum(..count..) * 100, 1), "%"), "")), 
+            position = position_stack(vjust = 0.5), color = "white") +   #add percentages inside bar in white font:
+    theme(legend.position = "top")+
+  theme(legend.title=element_blank()) #remove legend title
+```
+
+Create a 4-panel plot:
+
+```{r}
+
+### Figure 6
+
+#Create a 2 by 2 plot with p1 p2, p3 and p4 as panels:
+combined_plot_HATEST <- (p1_HATEST + p2_HATEST + p3_HATEST + p4_HATEST) +
+    plot_layout(ncol = 1, nrow = 4) +
+    plot_annotation(tag_levels = 'A') +
+    theme(plot.tag = element_text(face = 'bold'))
+
+#Save the combined plot to a file:
+ggsave(here("plots", "TEST_HATEST_results.png"), combined_plot_HATEST, width = 10, height = 10, dpi = 300, scale = 0.8)
+```
+
+
+
+## Compare overall accuracy of TEST and RETEST and HATEST against Gold Standard  answers
+
+Compare accuracy of TEST and retest using results_TEST and results_RETEST data frames, which are already prepared (after removing 3 variables with human prompt error):
+
+```{r}
+##for rdata_TEST
+#remove  3 messed up variables (in RETEST and HATEST) from the rdata_TEST data set:
+rdata_TEST_no3 <- rdata_TEST %>%
+  filter(!(Review_Variable %in% c("Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species")))
+#dim(rdata_TEST_no3) #67 rows left
+sum(rdata_TEST_no3$N_correct) / (sum(rdata_TEST_no3$N_correct) + sum(rdata_TEST_no3$N_incorrect)) #accuracy of TEST set without 3 messed up variables: 0.87 (86.6%)
+
+## for rdata_RETEST
+#remove  3 messed up variables (in RETEST and HATEST) from the rdata_RETEST data set:
+rdata_RETEST_no3 <- rdata_RETEST %>%
+  filter(!(Review_Variable %in% c("Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species")))
+#dim(rdata_RETEST_no3) #67 rows left
+sum(rdata_RETEST_no3$N_correct) / (sum(rdata_RETEST_no3$N_correct) + sum(rdata_RETEST_no3$N_incorrect)) #accuracy of TEST set without 3 messed up variables: 0.86 (85.6%)
+
+# test for comparison in TEST and RETEST:
+comp_TEST_RETEST <- matrix(c(sum(rdata_TEST_no3$N_correct),
+            sum(rdata_RETEST_no3$N_correct),
+            sum(rdata_TEST_no3$N_incorrect),
+            sum(rdata_RETEST_no3$N_incorrect)), ncol = 2)
+#statistical test for counts of matches and mismatches :
+chisq.test(comp_TEST_RETEST) #Pearson's Chi-squared test with Yates' continuity correction X-squared = 0.12472, df = 1, p-value = 0.724
+
+
+
+## for rdata_HATEST
+#remove  3 messed up variables (in RETEST and HATEST) from the rdata_HATEST data set:
+rdata_HATEST_no3 <- rdata_HATEST %>%
+  filter(!(Review_Variable %in% c("Lagisz_2020_Number of ambiguous cues", "Morrison_2024_Dosage highest", "Yang_2024_Species")))
+#dim(rdata_HATEST_no3) #67 rows left
+sum(rdata_HATEST_no3$N_correct) / (sum(rdata_HATEST_no3$N_correct) + sum(rdata_HATEST_no3$N_incorrect)) #accuracy of TEST set without 3 messed up variables: 0.82 (82.1%)
+
+
+# test for comparison in TEST and RETEST:
+comp_TEST_HATEST <- matrix(c(sum(rdata_TEST_no3$N_correct),
+            sum(rdata_HATEST_no3$N_correct),
+            sum(rdata_TEST_no3$N_incorrect),
+            sum(rdata_HATEST_no3$N_incorrect)), ncol = 2)
+#statistical test for counts of matches and mismatches :
+chisq.test(comp_TEST_HATEST) #Pearson's Chi-squared test with Yates' continuity correction X-squared = 0.12472, df = 1, p-value = 0.724
+```
+

@@ -1,0 +1,66 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Software,"Supporting quotes for ""Software""","Supporting  tables for ""Software""","Reasoning for ""Software"""
+,"Luis M Torres-Vila, Michael D Jennions, A Cockburn",-,-,-,-,-,Torres-Vila_2005.pdf,MetaWin 2.0,"  - ""We calculated mean effect sizes weighted for sample size (sampling variance) using MetaWin 2.0 (Rosenberg et al. 2000).""
+  - ""We report the mean effect size and 95% confidence intervals calculated using a bias-corrected bootstrap approach (1,000 replicates), as well as the within-group heterogeneity (Q w ) for each group of studies, assuming Q w follows a chi-square distribution, with df=number of studies1.""
+  - ""We ran random effects models that allow for a true random component, in addition to sampling error, as a source of variation in effect size among studies (Hedges and Olkin 1985).""",,"
+The paper mentions the use of several software packages for the meta-analysis:
+""We calculated mean effect sizes weighted for sample size (sampling variance) using MetaWin 2.0 (Rosenberg et al. 2000).""
+""We ran random effects models that allow for a true random component, in addition to sampling error, as a source of variation in effect size among studies (Hedges and Olkin 1985).""
+""We report the mean effect size and 95% confidence intervals calculated using a bias-corrected bootstrap approach (1,000 replicates), as well as the within-group heterogeneity (Q w ) for each group of studies, assuming Q w follows a chi-square distribution, with df=number of studies1.""
+The paper explicitly mentions the use of MetaWin 2.0 and the methods of Hedges and Olkin (1985) for the meta-analysis.
+"
+Assortative Mating in Animals,"Yuexin Jiang, Daniel I Bolnick, Mark Kirkpatrick",-,-,American Naturalist,361,2013,Jiang_2013.pdf,"R, metafor","  - ""All analyses were performed in R (R Development Core Team 2009) using the package metafor (Viechtbauer 2010).""
+  - ""We used restricted maximum likelihood with a mixed model (Viechtbauer 2010) to test whether the average of the species-trait means differs from 0 and to test for significant variation among factors (taxon, trait category).""",,"
+The paper does not explicitly mention any software used for the analysis. However, it does provide some details about the statistical methods and packages used:
+""We used restricted maximum likelihood with a mixed model (Viechtbauer 2010) to test whether the average of the species-trait means differs from 0 and to test for significant variation among factors (taxon, trait category).""
+""All analyses were performed in R (R Development Core Team 2009) using the package metafor (Viechtbauer 2010).""
+Based on these quotes, the software used for the analysis appears to be R and the metafor package.
+"
+Darwinian sex roles confirmed across the animal kingdom,"Tim Janicke, Ines K Häderer, Marc J Lajeunesse, Nils Anthes",-,-,Science Advances,323,2016,Janicke_2016.pdf,"R, metafor version 1.9.2","  - ""Multivariate linear mixed-effects models were performed using the R package metafor version 1.9.2 (75).""
+  - ""we reconstructed a phylogeny (fig.  S4 ) based on divergence times retrieved from the TimeTree database (61) (expert results) complemented with information from additional primary studies [that is, Pulmonata (62), Coenagrionidae (63), Heteroptera (64), Bruchinae (65), Strongylocentrotidae (66), Osteichthyes (67-69), Anura (70), Lacertidae (71), and Rodentia (72,73)].""",,"
+The paper does not explicitly mention any software used for the analysis. However, it does provide some details about the methods used:
+""We reconstructed a phylogeny (fig. S4) based on divergence times retrieved from the TimeTree database (61) (expert results) complemented with information from additional primary studies [that is, Pulmonata (62), Coenagrionidae (63), Heteroptera (64), Bruchinae (65), Strongylocentrotidae (66), Osteichthyes (67-69), Anura (70), Lacertidae (71), and Rodentia (72,73)].""
+This suggests that the TimeTree database was used to reconstruct the phylogeny.
+""Multivariate linear mixed-effects models were performed using the R package metafor version 1.9.2 (75).""
+The paper explicitly states that the R package metafor version 1.9.2 was used to perform the multivariate linear mixed-effects models.
+"
+Measuring and interpreting sexual selection metrics: evaluation and guidelines,"Nils Anthes, Ines K H € Aderer, Nico K Michiels, Tim Janicke",-,-,,41,2017,Anthes_2017.pdf,Not mentioned (the paper does not mention any software used for the analysis),,,"
+The paper does not mention any specific software or software packages used for the analysis. There are no quotes that indicate the use of any particular software.
+"
+Mechanisms of Social Influence: A Meta-Analysis of the Effects of Social Information on Female Mate Choice Decisions,"Blake Carlton Jones, Emily H Duval",-,-,Frontiers in Ecology and Evolution,33,2019,Jones_2019.pdf,"R, version 3.6.0
+MCMCglmm package
+meta package","  - ""We conducted a meta-analysis of results from mate-choice copying studies using univariate-response Bayesian generalized linear models with Markov chain Monte Carlo (Hadfield, 2010;Hadfield and Nakagawa, 2010) in the programing language R, version 3.6.0 (R Core Team, 2019) and MCMCglmm package (Hadfield, 2010).""
+  - ""We assessed the impact of this publication bias using the trim and fill test (Duval and Tweedie, 2000), which added 25 data points to our original 103 , equivalent to a 50/50 likelihood of mating with a male after observing another female choose that male, or a phenotypically similar individual. X-axis is on a log10 scale.""",,"
+The paper mentions that the authors used the programming language R, version 3.6.0 and the MCMCglmm package for their meta-analysis:
+""We conducted a meta-analysis of results from mate-choice copying studies using univariate-response Bayesian generalized linear models with Markov chain Monte Carlo (Hadfield, 2010;Hadfield and Nakagawa, 2010) in the programing language R, version 3.6.0 (R Core Team, 2019) and MCMCglmm package (Hadfield, 2010).""
+The paper also mentions using the meta package for the ""trim and fill"" method to assess publication bias:
+""We assessed the impact of this publication bias using the trim and fill test (Duval and Tweedie, 2000), which added 25 data points to our original 103 , equivalent to a 50/50 likelihood of mating with a male after observing another female choose that male, or a phenotypically similar individual. X-axis is on a log10 scale.""
+"
+No evidence of immediate fitness benefits of within-season divorce in monogamous birds,"Antica Culina, Lyanne Brouwer",-,-,Biology Letters,5,2022,Culina_2022.pdf,"MCMCglmm, ape, metafor","  - ""Phylogenetic trees were constructed using birdtree.org [58] and implemented via package 'ape' v. 5.5 [59].""
+  - ""We conducted trim-and-fill using random-effect meta-analysis with the restricted maximum-likelihood estimation (REML) in the R package 'metafor' v. 2.4.0 [67].""
+  - ""We ran three separate sets of multi-level meta-analyses and meta-regressions (before, after, and FvsM). All the analyses were implemented in package 'MCMCglmm' v. 2.32 [56] in R v. 4.0.4 [57].""",,"
+The paper mentions that the meta-analyses and meta-regressions were implemented using the 'MCMCglmm' package in R:
+""We ran three separate sets of multi-level meta-analyses and meta-regressions (before, after, and FvsM). All the analyses were implemented in package 'MCMCglmm' v. 2.32 [56] in R v. 4.0.4 [57].""
+The paper also mentions using the 'ape' package for implementing the phylogenetic trees:
+""Phylogenetic trees were constructed using birdtree.org [58] and implemented via package 'ape' v. 5.5 [59].""
+Additionally, the trim-and-fill analysis was conducted using the 'metafor' package:
+""We conducted trim-and-fill using random-effect meta-analysis with the restricted maximum-likelihood estimation (REML) in the R package 'metafor' v. 2.4.0 [67].""
+"
+The relative importance of size and asymmetry in sexual selection,"R Thornhid', A P M0ller, A P Moller",-,-,,87,1998,Thornhill_1998.pdf,Not mentioned (the paper does not mention the specific software used for the analysis),"  - ""Weighted mean effect sizes were calculated using Fisher's transformation of r to Z, (Sokal and Rohlf, 1996) and calculation of a mean weighted Zn where mean weighted Z, a 1 uyZySwŵ here u>j is the weight factor for analysis unit j, with Wj equaling Nj-3 in the present case (Rosenthal, 1991).""
+  - ""Meta-analysis consists of obtaining an estimate of the magnitude of a general effect of interest from each of a number of studies, calculating average effects, and elucidating moderator variables that account for heterogeneity among studies.""
+  - ""We calculated effect sizes as the Pearson product-moment correlation coefficients, following the procedures outlined in Rosenthal (1991), Hedges and Olkin (1985), and Cooper and Hedges (1994).""",,"
+The paper does not explicitly mention any software or software packages used for the analysis. However, the paper does describe the meta-analysis methods used, which provide some clues about the potential software:
+""Meta-analysis consists of obtaining an estimate of the magnitude of a general effect of interest from each of a number of studies, calculating average effects, and elucidating moderator variables that account for heterogeneity among studies.""
+""We calculated effect sizes as the Pearson product-moment correlation coefficients, following the procedures outlined in Rosenthal (1991), Hedges and Olkin (1985), and Cooper and Hedges (1994).""
+""Weighted mean effect sizes were calculated using Fisher's transformation of r to Z, (Sokal and Rohlf, 1996) and calculation of a mean weighted Zn where mean weighted Z, a 1 uyZySwŵ here u>j is the weight factor for analysis unit j, with Wj equaling Nj-3 in the present case (Rosenthal, 1991).""
+Based on the meta-analysis methods described, the authors likely used general statistical software like R, SAS, or SPSS to perform the calculations, but the paper does not specify which software was used.
+"
+Variation in pre-and post-copulatory sexual selection on male genital size in two species of lygaeid bug,"Liam R Dougherty, David M Shuker",-,-,Behavioral Ecology and Sociobiology,18,2016,Dougherty_2016.pdf,"R version 3.1.0, Metafor package","  - ""All statistical analyses were performed in R version 3.1.0 (R Development Core Team 2014).""
+  - ""This analysis was performed in R 3.0.1 (R Development Core Team 2014) using the Metafor package (Viechtbauer 2010).""
+  - ""These slides were then imaged using an Olympus SZX10 stereo microscope and attached camera, and measured using the image analysis program Cell^D (Soft Imaging System, Olympus Corp).""",,"
+The paper does not explicitly mention any software used for the analysis. However, it does state that the statistical analyses were performed in R version 3.1.0:
+""All statistical analyses were performed in R version 3.1.0 (R Development Core Team 2014).""
+Additionally, the paper mentions using the Metafor package in R for the meta-analysis:
+""This analysis was performed in R 3.0.1 (R Development Core Team 2014) using the Metafor package (Viechtbauer 2010).""
+The paper also states that the images were analyzed using the image analysis program Cell^D (Soft Imaging System, Olympus Corp):
+""These slides were then imaged using an Olympus SZX10 stereo microscope and attached camera, and measured using the image analysis program Cell^D (Soft Imaging System, Olympus Corp).""
+"

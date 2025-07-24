@@ -1,0 +1,65 @@
+Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Search sources,"Supporting quotes for ""Search sources""","Supporting  tables for ""Search sources""","Reasoning for ""Search sources"""
+,"Luis M Torres-Vila, Michael D Jennions, A Cockburn",-,-,-,-,-,Torres-Vila_2005.pdf,"scientific literature databases, the Internet, and previous reviews","  - ""consulted scientific literature databases, the Internet and previous reviews on this and related topics""
+  - ""We consulted scientific literature databases, the Internet and previous reviews on this and related topics (Ridley 1988;Vahed 1998;Arnqvist and Nilsson 2000;Torres-Vila et al. 2004) to compile data from 29 studies of 25 Lepidopteran species that related female reproductive output to male mating history (Table 1""",,"
+The paper mentions that the authors ""consulted scientific literature databases, the Internet and previous reviews on this and related topics"" to compile the data for their meta-analysis. Specifically, the paper states:
+""We consulted scientific literature databases, the Internet and previous reviews on this and related topics (Ridley 1988;Vahed 1998;Arnqvist and Nilsson 2000;Torres-Vila et al. 2004) to compile data from 29 studies of 25 Lepidopteran species that related female reproductive output to male mating history (Table 1).""
+From this, we can infer that the search sources used in this review were:
+"
+Assortative Mating in Animals,"Yuexin Jiang, Daniel I Bolnick, Mark Kirkpatrick",-,-,American Naturalist,363,2013,Jiang_2013.pdf,"Google Scholar, JSTOR, Web of Science","  - ""searched for publications reporting suitable measures of assortative mating, using keywords searches in multiple databases, including Google Scholar, JSTOR, and Web of Science.""
+  - ""examined the reference sections of relevant publications to find additional studies.""",,"
+The paper states that the authors ""searched for publications reporting suitable measures of assortative mating, using keywords searches in multiple databases, including Google Scholar, JSTOR, and Web of Science."" This indicates that the search sources used were:
+
+Google Scholar, JSTOR, and Web of Science
+
+The paper also mentions that the authors ""examined the reference sections of relevant publications to find additional studies."" However, this is not considered a separate search source, but rather a supplementary method to find additional relevant studies.
+"
+Darwinian sex roles confirmed across the animal kingdom,"Tim Janicke, Ines K Häderer, Marc J Lajeunesse, Nils Anthes",-,-,Science Advances,323,2016,Janicke_2016.pdf,"Web of Science, EvolDir mailing list","  - ""Further, we posted a request for ""gray"" literature and unpublished data sets on the ""EvolDir"" mailing list (http://evol.mcmaster. ca/evoldir.html) on 4 December 2012.""
+  - ""We first identified relevant studies from ISI Web of Knowledge (Web of Science Core Collection, from 1900 to 2014) with the ""topic"" search terms defined as (""Bateman*"" OR ""opportunit* for selection"" OR ""opportunit* for sexual selection"" OR ""selection gradient*"").""
+  - ""We added 22 studies to this candidate pool based on downward citation searches using the candidates identified with ISI Web of Knowledge (fig.  S1""
+  - ""opportunit* for sexual selection""""
+  - ""This literature search was initiated on 6 December 2012 and repeated on 25 April 2015.""",,"
+The paper states that the systematic literature search was conducted using the following sources:
+""We first identified relevant studies from ISI Web of Knowledge (Web of Science Core Collection, from 1900 to 2014) with the ""topic"" search terms defined as (""Bateman*"" OR ""opportunit* for selection"" OR ""opportunit* for sexual selection"" OR ""selection gradient*"").""
+""This literature search was initiated on 6 December 2012 and repeated on 25 April 2015.""
+""Further, we posted a request for ""gray"" literature and unpublished data sets on the ""EvolDir"" mailing list (http://evol.mcmaster. ca/evoldir.html) on 4 December 2012.""
+""We added 22 studies to this candidate pool based on downward citation searches using the candidates identified with ISI Web of Knowledge (fig.  S1 ).""
+The paper clearly states that the main search source was the ISI Web of Knowledge (Web of Science Core Collection), and they also searched the EvolDir mailing list for grey literature. They also conducted citation searches to identify additional relevant studies.
+"
+Measuring and interpreting sexual selection metrics: evaluation and guidelines,"Nils Anthes, Ines K H € Aderer, Nico K Michiels, Tim Janicke",-,-,,41,2017,Anthes_2017.pdf,Not mentioned (no search sources are explicitly mentioned in the paper),"  - ""Using our meta-analysis data set (Janicke et al. 2016), we tested for systematic changes in the opportunity for sexual selection (I s ) and the Bateman gradient (b ss ) arising from the use of genetic mating success (gMS) instead of copulatory mating success (cMS).""
+  - ""Drawing from a recent meta-analysis, we evaluate potential biases arising from study design, data collection and parameter estimation, and provide suggestions to mitigate such biases in future studies.""
+  - ""To test this predicted bias, we extracted male and female estimates of I s and b ss from 28 studies in our meta-analysis data set (cf. section 'Mating success: definition and meaning') that allowed us to include and exclude individuals with zero mating success.""",,"
+The paper does not explicitly mention any specific search sources used to find the literature reviewed. However, it does state that the review draws from a ""meta-analysis database"" that the authors previously compiled:
+""Drawing from a recent meta-analysis, we evaluate potential biases arising from study design, data collection and parameter estimation, and provide suggestions to mitigate such biases in future studies.""
+""Using our meta-analysis data set (Janicke et al. 2016), we tested for systematic changes in the opportunity for sexual selection (I s ) and the Bateman gradient (b ss ) arising from the use of genetic mating success (gMS) instead of copulatory mating success (cMS).""
+""To test this predicted bias, we extracted male and female estimates of I s and b ss from 28 studies in our meta-analysis data set (cf. section 'Mating success: definition and meaning') that allowed us to include and exclude individuals with zero mating success.""
+Based on these quotes, it appears the authors relied on a pre-existing meta-analysis database they had compiled, rather than conducting a new systematic search of the literature. The paper does not mention any specific search sources used to compile that original meta-analysis database.
+"
+Mechanisms of Social Influence: A Meta-Analysis of the Effects of Social Information on Female Mate Choice Decisions,"Blake Carlton Jones, Emily H Duval",-,-,Frontiers in Ecology and Evolution,33,2019,Jones_2019.pdf,Web of Science (ISI Thomas Reuters),"  - ""We conducted a meta-analysis of empirical studies quantifying mate-choice copying in non-human animals. We identified relevant studies using a topic search in Web of Science (ISI Thomas Reuters) specifying the search criteria as: TS = [(""mate choice"" AND ""copy * "") OR (""mate-choice"" AND ""copy * "") OR ""mate-copy * "" OR ""mate copy * "" OR ""female * copy * ""], targeting peer-reviewed research published between 1900 and May 2019.""",,"
+The paper states that the search was conducted using Web of Science (ISI Thomas Reuters):
+""We conducted a meta-analysis of empirical studies quantifying mate-choice copying in non-human animals. We identified relevant studies using a topic search in Web of Science (ISI Thomas Reuters) specifying the search criteria as: TS = [(""mate choice"" AND ""copy * "") OR (""mate-choice"" AND ""copy * "") OR ""mate-copy * "" OR ""mate copy * "" OR ""female * copy * ""], targeting peer-reviewed research published between 1900 and May 2019.""
+The paper does not mention any other search sources, so it appears that Web of Science (ISI Thomas Reuters) was the only source used for the literature search.
+"
+No evidence of immediate fitness benefits of within-season divorce in monogamous birds,"Antica Culina, Lyanne Brouwer",-,-,Biology Letters,5,2022,Culina_2022.pdf,"Web of Science, Scopus, Google Scholar, Biological Abstracts, BIOSIS Previews, Zoological Record, JSTOR, ProQuest Dissertations & Theses Global, Wiley Online Library, Springer Link, Science Direct, Ovid, Embase, PubMed, and Cochrane Library.","  - ""conducted a systematic literature search for studies published in English via 15 online databases/search platforms""
+  - ""We conducted a systematic literature search for studies published in English via 15 online databases/search platforms (see electronic supplementary material, Methods) in March 2022.""
+  - ""The search syntax included three main components that were designed to describe: (a) pair-bond dynamics and renesting (e.g. 'mate change' OR renest × OR 'mate retention'); (b) breeding success (e.g. 'breeding success' OR 'breeding output'); (c) that breeding attempts were within the same breeding season (e.g. 'within the season' OR 'within a year*').""",,"
+The paper states that the authors ""conducted a systematic literature search for studies published in English via 15 online databases/search platforms"". The specific databases and search platforms used are listed in the electronic supplementary material, Methods section:
+
+""We conducted a systematic literature search for studies published in English via 15 online databases/search platforms (see electronic supplementary material, Methods) in March 2022.""
+
+The paper also provides the following quote about the search syntax used:
+
+""The search syntax included three main components that were designed to describe: (a) pair-bond dynamics and renesting (e.g. 'mate change' OR renest × OR 'mate retention'); (b) breeding success (e.g. 'breeding success' OR 'breeding output'); (c) that breeding attempts were within the same breeding season (e.g. 'within the season' OR 'within a year*').""
+
+Therefore, the search sources used in this review were:
+"
+The relative importance of size and asymmetry in sexual selection,"R Thornhid', A P M0ller, A P Moller",-,-,,87,1998,Thornhill_1998.pdf,No search sources found,"  - ""from Moller and Thornhill (1998), which was based on (1) a comprehensive search of the literature and of the Internet for information on the relationship between asymmetry and sexual selection, and (2) correspondence between the authors and behavioral ecologists conducting research on this relationship.""
+  - ""The data set used for the present study is from Moller and Thornhill (1998), which was based on (1) a comprehensive search of the literature and of the Internet for information on the relationship between asymmetry and sexual selection, and (2) correspondence between the authors and behavioral ecologists conducting research on this relationship.""",,"
+The paper does not explicitly mention the search sources used to find the studies included in the meta-analysis. However, the authors state that the data set was ""from Moller and Thornhill (1998), which was based on (1) a comprehensive search of the literature and of the Internet for information on the relationship between asymmetry and sexual selection, and (2) correspondence between the authors and behavioral ecologists conducting research on this relationship.""
+
+""The data set used for the present study is from Moller and Thornhill (1998), which was based on (1) a comprehensive search of the literature and of the Internet for information on the relationship between asymmetry and sexual selection, and (2) correspondence between the authors and behavioral ecologists conducting research on this relationship.""
+
+From this, we can infer that the search sources likely included academic literature databases and the internet, as well as direct correspondence with researchers in the field.
+"
+Variation in pre-and post-copulatory sexual selection on male genital size in two species of lygaeid bug,"Liam R Dougherty, David M Shuker",-,-,Behavioral Ecology and Sociobiology,18,2016,Dougherty_2016.pdf,No search sources found,,,"
+The paper does not explicitly mention any search sources used. There are no references to online databases, search engines, or other sources that were used to find relevant literature for this study. The paper focuses on reporting the results of two experiments conducted by the authors on Lygaeus equestris and Lygaeus simulans, and does not describe a systematic review or meta-analysis that would require searching multiple sources.
+"

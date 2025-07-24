@@ -1,0 +1,76 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Data shared,"Supporting quotes for ""Data shared""","Supporting  tables for ""Data shared""","Reasoning for ""Data shared"""
+Body size affects the evolution of eyespots in caterpillars,"Thomas John Hossie, John Skelhorn, Jesse W Breinholt, Akito Y Kawahara, Thomas N Sherratt",-,-,Proceedings of the National Academy of Sciences of the United States of America,49,2015,Hossie_2015.pdf,yes,"  - ""We conducted a PGLS analysis on the ML tree with body size as the response variable and the presence/absence of eyespots as a binary predictor (factors are not permitted as response variables in PGLS). We ran PGLS models assuming either a Brownian motion or an Ornstein-Uhlenbeck (54) model of evolution, and then compared their fits using a likelihood ratio test (55). To test whether accounting for phylogenetic autocorrelation was necessary, we tested whether the residuals from a linear model without phylogenetic control showed a phylogenetic signal (56) using the ""phylosig"" function in the R package ""phytools"" (57). We estimated the strength of the association by comparing the residual variance of the model and the null model (assuming the same correlation structure; i.e., 1
+
+), as outlined by Paradis (58).""
+  - ""The design of artificial prey for the laboratory presentations to domestic chicks was slightly modified to allow the inclusion of two additional treatments to account for a possible confounding effect of eyespot size. Specifically, small prey were 25 mm long and 6 mm in diameter, and large prey were 40 mm long and 7 mm in diameter. For each prey body size, either small or large eyespots (2.2 mm or 4.5 mm diameter, respectively) were added such that six treatments were produced: small-no eyespots, small-small eyespots, small-large eyespots, large-no eyespots, large-small eyespots, and largelarge eyespots.""
+  - ""Artificial Prey. Artificial caterpillars were designed to quantify the selective advantage of eyespots on large and small prey. Construction of artificial caterpillars followed a methodology similar to that used in previous studies (11,12). The caterpillar models in our field experiment comprised four treatments: small-no eyespots, large-no eyespots, small-eyespots, and largeeyespots. All treatments were similarly countershaded, because Hossie and Sherratt (12) revealed that eyespots effectively protected these artificial caterpillars from birds only when the caterpillars were countershaded as well.""",,"
+The paper states that the data matrix used for the phylogenetic analysis has been provided as a supplementary file:
+""We conducted a PGLS analysis on the ML tree with body size as the response variable and the presence/absence of eyespots as a binary predictor (factors are not permitted as response variables in PGLS). We ran PGLS models assuming either a Brownian motion or an Ornstein-Uhlenbeck (54) model of evolution, and then compared their fits using a likelihood ratio test (55). To test whether accounting for phylogenetic autocorrelation was necessary, we tested whether the residuals from a linear model without phylogenetic control showed a phylogenetic signal (56) using the ""phylosig"" function in the R package ""phytools"" (57). We estimated the strength of the association by comparing the residual variance of the model and the null model (assuming the same correlation structure; i.e., 1
+
+), as outlined by Paradis (58).""
+The paper also states that the data matrix has a significantly expanded taxon set from a previously published study:
+""We conducted a PGLS analysis on the ML tree with body size as the response variable and the presence/absence of eyespots as a binary predictor (factors are not permitted as response variables in PGLS). We ran PGLS models assuming either a Brownian motion or an Ornstein-Uhlenbeck (54) model of evolution, and then compared their fits using a likelihood ratio test (55). To test whether accounting for phylogenetic autocorrelation was necessary, we tested whether the residuals from a linear model without phylogenetic control showed a phylogenetic signal (56) using the ""phylosig"" function in the R package ""phytools"" (57). We estimated the strength of the association by comparing the residual variance of the model and the null model (assuming the same correlation structure; i.e., 1
+
+), as outlined by Paradis (58).""
+"
+Deflective effect and the effect of prey detectability on anti-predator function of eyespots,"Adrian Vallin, Marina Dimitrova, Ullasa Kodandaramaiah, Sami Merilaita, D Kemp",-,-,Behavioral Ecology and Sociobiology,36,2011,Vallin_2011.pdf,no,"  - ""All the birds maintained their condition and were healthy upon release.""
+  - ""The experimental protocol and housing of birds was reviewed and approved by the regional ethical committee in Linköping (Dnr: 62-08).""
+  - ""We used R 2.9.2 for Windows (R Development Core Team 2009) for analyzing the data.""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been shared or made publicly available. There are no mentions of supplementary materials, data repositories, or instructions on how to access the data.
+
+""We used R 2.9.2 for Windows (R Development Core Team 2009) for analyzing the data.""
+This quote indicates that the authors analyzed the data, but does not specify whether the raw data has been shared.
+""The experimental protocol and housing of birds was reviewed and approved by the regional ethical committee in Linköping (Dnr: 62-08).""
+This quote discusses the experimental protocol, but again does not mention data sharing.
+""All the birds maintained their condition and were healthy upon release.""
+This quote is about the condition of the birds, and does not relate to data sharing.
+
+Based on the lack of any explicit statements about data sharing in the paper, the most likely answer is that the raw data has not been shared publicly.
+"
+Eyespots interact with body colour to protect caterpillar-like prey from avian predators,"Thomas John Hossie, Thomas N Sherratt",-,-,Animal Behaviour,36,2012,Hossie_2012.pdf,no,"  - ""Supplementary material for this article is available, in the online version, at doi:10.1016/j.anbehav.2012.04.027.""
+  - ""The entire process was replicated nine times (three times per site, albeit at a different location within site) for a total of 864 artificial prey deployed.""
+  - ""Pastry caterpillars were designed to be fully palatable to birds, and our experimental design was approved by the Carleton University Research Ethics Committee (Protocol B10-14).""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been shared. There are no mentions of data availability or links to external data repositories in the paper.
+""Supplementary material for this article is available, in the online version, at doi:10.1016/j.anbehav.2012.04.027.""
+This quote indicates that there is supplementary material available, but it does not specify whether the raw data used in the analyses is included in that supplementary material.
+""Pastry caterpillars were designed to be fully palatable to birds, and our experimental design was approved by the Carleton University Research Ethics Committee (Protocol B10-14).""
+This quote suggests that the authors used artificial caterpillars in their experiment, but does not indicate whether the raw data from those experiments has been shared.
+""The entire process was replicated nine times (three times per site, albeit at a different location within site) for a total of 864 artificial prey deployed.""
+This quote provides details about the experimental design, but again does not mention data sharing.
+"
+Field experiments on the effectiveness of 'eyespots' as predator deterrents,"Martin Stevens, Elinor Hopkins, William Hinde, Amabel Adcock, Yvonne Connolly, Tom Troscianko, Innes C Cuthill, K T Troscianko",-,-,-,-,-,Stevens_2007.pdf,no,"  - ""Unfortunately, it is not possible to print stimuli with ultraviolet (UV) reflectance using conventional printers and paper, and so our targets lacked this component.""
+  - ""Survival analysis for all experiments was performed via Cox proportional hazards regression (Cox 1972;Lawless 2002;Klein & Moeschberger 2003), which can accommodate censored data and the nonuniform change in predation risk with respect to time of day.""
+  - ""The protocol of each experiment was similar to that of Cuthill et al. (2005).""",,"
+To determine if the data used in this study has been shared, I will look for any mentions of data availability or sharing in the paper.
+""Unfortunately, it is not possible to print stimuli with ultraviolet (UV) reflectance using conventional printers and paper, and so our targets lacked this component.""
+This quote indicates that the physical stimuli used in the experiments were printed on paper, but does not mention if the raw data from the experiments has been shared.
+""The protocol of each experiment was similar to that of Cuthill et al. (2005).""
+This quote references another paper, but does not indicate if the data from the current study has been shared.
+""Survival analysis for all experiments was performed via Cox proportional hazards regression (Cox 1972;Lawless 2002;Klein & Moeschberger 2003), which can accommodate censored data and the nonuniform change in predation risk with respect to time of day.""
+This quote describes the statistical analysis used, but does not mention data sharing.
+"
+Significance of butterfly eyespots as an anti-predator device in ground-based and aerial attacks,"Anne Lyytinen, Paul M Brakefield, Johanna Mappes",-,-,,91,2003,Lyytinen_2003.pdf,no,"  - ""There are no mentions of any raw data or supplementary materials being made available in the paper.""",,"
+To determine if the raw data used for the analyses presented in the article has been shared, I will look for any mentions of data availability or supplementary materials in the paper.
+""There are no mentions of any raw data or supplementary materials being made available in the paper.""
+The paper does not contain any information about the availability of the raw data used in the analyses. There are also no links or references to an external file repository where the data could be accessed.
+"
+The Feeding Behaviour of Starlings (Sturnus vulgaris) in the Presence of 'Eyes',"I R Inglis, L W Huson, M B Marshall, P A Arid,  Neville",-,-,-,-,-,Inglis_1983.pdf,no,,,"
+The paper does not mention whether the raw data used for the analyses has been shared or made available. There are no quotes in the paper that indicate the data has been shared or made available in supplementary materials or an external repository. The paper only describes the experimental procedures and results, without any mention of data availability.
+"
+The position of eyespots and thickened segments influence their protective value to caterpillars,"John Skelhorn, Giles Dorrington, Thomas J Hossie, Thomas N Sherratt",-,-,,15,2014,Skelhorn_2014.pdf,no,"  - ""Supplementary material can be found at http://www.beheco. oxfordjournals.org/""
+  - ""Supplementary material can be found at http://www.beheco. oxfordjournals.org/""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been shared. However, the paper does mention that ""Supplementary material can be found at http://www.beheco.oxfordjournals.org/"", which suggests that some supplementary material related to the study may be available online.
+""Supplementary material can be found at http://www.beheco. oxfordjournals.org/""
+The paper does not provide a direct statement about the availability of the raw data used in the analyses. There is no mention of a data repository or a statement that the data is available upon request.
+"
+"The protective value of conspicuous signals is not impaired by shape, size, or position asymmetry","Martin Stevens, Sarah A Castor-Perry, Jessica R F Price",-,-,,19,2009,Stevens&CastorPerry_2009.pdf,no,"  - ""Survival analysis was used to analyse the results, which can accommodate nonuniform changes in predation risk with respect to time of day. Survival analysis is ideally suited to accommodate censored values (here nonavian predation, lost targets, and survival to the end of a block), which still provide information on those replicates up until the time point at which a nonavian predation event occurred.""
+  - ""Targets were pinned to trees of various species at a height of 1-2 m in the mixed deciduous University of Cambridge Madingley Woods, Cambridgeshire, UK (0°3.2#E, 52°12.9#N), and checked at regular time intervals (depending on the experiment).""
+  - ""The experiment followed the same overall procedure as Stevens et al. (2007) and Stevens, Hardman, and Stubbins (2008) , with gray-scale artificial ''prey,'' 76 mm wide and 38 mm high, made from triangular pieces of waterproof paper (HP LaserJet Tough Paper, Palo Alto, CA). These were printed with specific patterns, made in Image J (Rasband 1997 (Rasband -2007;; Abra `moff et al. 2004) and Photoshop Elements 2.0 (Adobe Systems Inc., San Jose, CA), on a Hewlett Packard LaserJet 2200dn printer at 300 dpi.""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been shared. There are no mentions of supplementary materials, links to external data repositories, or instructions on how to request the data.
+
+""The experiment followed the same overall procedure as Stevens et al. (2007) and Stevens, Hardman, and Stubbins (2008), with gray-scale artificial ''prey,'' 76 mm wide and 38 mm high, made from triangular pieces of waterproof paper (HP LaserJet Tough Paper, Palo Alto, CA). These were printed with specific patterns, made in Image J (Rasband 1997 (Rasband -2007;; Abra `moff et al. 2004) and Photoshop Elements 2.0 (Adobe Systems Inc., San Jose, CA), on a Hewlett Packard LaserJet 2200dn printer at 300 dpi.""
+""Targets were pinned to trees of various species at a height of 1-2 m in the mixed deciduous University of Cambridge Madingley Woods, Cambridgeshire, UK (0°3.2#E, 52°12.9#N), and checked at regular time intervals (depending on the experiment).""
+""Survival analysis was used to analyse the results, which can accommodate nonuniform changes in predation risk with respect to time of day. Survival analysis is ideally suited to accommodate censored values (here nonavian predation, lost targets, and survival to the end of a block), which still provide information on those replicates up until the time point at which a nonavian predation event occurred.""
+
+The paper provides details on the experimental procedures, materials, and analysis methods, but does not mention anything about data sharing.
+"

@@ -1,0 +1,82 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Meta-analysis,"Supporting quotes for ""Meta-analysis""","Supporting  tables for ""Meta-analysis""","Reasoning for ""Meta-analysis"""
+Association between maternal exposure to perfluoroalkyl and polyfluoroalkyl substances and risks of adverse pregnancy outcomes: A systematic review and meta-analysis,"Zhuoma Deji, Peng Liu, Xin Wang, Xin Zhang, Yuehua Luo, Zhenzhen Huang",-,-,Science of the Total Environment,39,2021,Deji_2021.pdf,yes,"  - ""A random-effects model meta-analysis was performed to calculate pooled effect estimates and investigate the associations between PFASs and miscarriage, stillbirth or preterm birth.""
+  - ""We reported pooled data with ORs, mostly used in studies with different designs, populations and lengths of follow-up, and their 95% CIs, while other effect sizes were transformed into ORs. HRs were roughly considered equivalent to RRs which were calculated from ORs using the following formula: RR = OR/[1 -P 0 × (1 -OR)], where P 0 is the risk of the outcome of interest occurred in the whole participants (Buawangpong et al., 2020). To assess heterogeneity across studies, forest plots and standard cut-offs for I 2 statistic were used. The I 2 values of 25%, 50%, and 75% were considered as low, medium, and high heterogeneity, respectively. Subgroup and sensitivity analyses were performed to investigate the causes of heterogeneity.""",,"
+The paper clearly states that it includes a meta-analysis:
+""A random-effects model meta-analysis was performed to calculate pooled effect estimates and investigate the associations between PFASs and miscarriage, stillbirth or preterm birth.""
+The paper also provides details on the meta-analysis methodology:
+""We reported pooled data with ORs, mostly used in studies with different designs, populations and lengths of follow-up, and their 95% CIs, while other effect sizes were transformed into ORs. HRs were roughly considered equivalent to RRs which were calculated from ORs using the following formula: RR = OR/[1 -P 0 × (1 -OR)], where P 0 is the risk of the outcome of interest occurred in the whole participants (Buawangpong et al., 2020). To assess heterogeneity across studies, forest plots and standard cut-offs for I 2 statistic were used. The I 2 values of 25%, 50%, and 75% were considered as low, medium, and high heterogeneity, respectively. Subgroup and sensitivity analyses were performed to investigate the causes of heterogeneity.""
+The paper also presents the results of the meta-analysis in detail, including forest plots and pooled effect estimates.
+"
+ENVIRONMENTAL CONTAMINANT EXPOSURES AND PRETERM BIRTH: A COMPREHENSIVE REVIEW,"Kelly K Ferguson, Marie S O'neill, John D Meeker",-,-,"Journal of Toxicology and Environmental Health. Part B, Critical Reviews",145,2013,Ferguson_2013.pdf,no,,,"
+The review by Ferguson et al. (2013) does not include a meta-analysis. This can be determined from the following quotes:
+After compiling the relevant studies and dividing them into appropriate groups, information from each paper was summarized as follows. First, in text, important characteristics of each individual study were described, highlighting any limitations and strengths that should be either avoided or emulated in future investigations.
+The review focuses on summarizing and describing the individual studies, rather than conducting a quantitative meta-analysis.
+Finally, in forest plots, odds ratios (OR) observed for each study were displayed by environmental exposure to provide a visual depiction of the existing data (Neyeloff et al., 2012). Results from studies that examined differences in levels of exposure in preterm versus term births but did not calculate OR were excluded from figures.
+The review includes forest plots to visually depict the odds ratios from individual studies, but does not perform a formal meta-analysis to combine the results.
+Grellier and colleagues (2010) concluded that based on the existing literature there was insufficient evidence to indicate an association between THM exposure and any birth outcome, including preterm birth. Similarly, no apparent relationships for HAA emerged, although examining effects of this exposure was not a primary aim in the study.
+The review does cite a previous meta-analysis by Grellier et al. (2010), but does not conduct a new meta-analysis as part of this review.
+"
+"Early-Life Exposure to Per-and Poly-Fluorinated Alkyl Substances and Growth, Adiposity, and Puberty in Children: A Systematic Review","Yun Jeong Lee, Hae Woon, Hwa Young Kim, Yoon-Jung Choi, Young Ah Lee, Alberto Mantovani",-,-,Frontiers in Endocrinology,53,2021,Lee_2021.pdf,no,"  - ""We performed a systematic review of the epidemiologic literature to assess the effects of earlylife PFAS exposure on prenatal and postnatal growth, adiposity, and puberty in children and adolescents.""",,"
+The paper states that it performed a systematic review of the epidemiologic literature, but does not mention conducting a meta-analysis. The paper states:
+""We performed a systematic review of the epidemiologic literature to assess the effects of earlylife PFAS exposure on prenatal and postnatal growth, adiposity, and puberty in children and adolescents.""
+The paper also mentions two previous meta-analyses that were conducted on the effects of PFAS on birth weight:
+""Two recent meta-analyses of 16 and 24 studies (69,70), found decreases in birth weight of 12.8 g (69) and 10.5 g (70) with 1 ng/ml increases in PFOA in maternal and cord blood, respectively. For PFOS, a meta-analysis of nine studies showed a 0.9 g decrease in birth weight per 1 ng/ml increases in maternal PFOS exposures (69).""
+However, the current paper itself does not appear to have conducted a meta-analysis. The paper focuses on summarizing the findings from the individual studies reviewed, rather than quantitatively synthesizing the results.
+"
+Human exposure pathways to poly-and perfluoroalkyl substances (PFAS) from indoor media: A systematic review,"Nicole M Deluca, Jeffrey M Minucci, Ashley Mullikin, Rachel Slover, Elaine A Cohen Hubal, Adrian Covaci, B S T R A C T",-,-,-,-,-,DeLuca_2022.pdf,no,"  - ""Additional uncertainty in the study is derived from the estimation of parameters in exposure equations, such as the elimination rate, which is still an active area of research for PFAS chemicals.""
+  - ""Results of evidence synthesis are also not considered robust where weighted medians for some sensitivity studies were calculated using only two data points.""",,"
+The paper does not appear to include a meta-analysis. The paper states that ""Due to the limited number of studies included in the review, evidence maps were not produced from literature inventory summaries as was anticipated in the protocol."" This suggests that the authors did not have enough studies to perform a quantitative meta-analysis.
+
+""Due to the limited number of studies included in the review, evidence maps were not produced from literature inventory summaries as was anticipated in the protocol.""
+""Results of evidence synthesis are also not considered robust where weighted medians for some sensitivity studies were calculated using only two data points.""
+""Additional uncertainty in the study is derived from the estimation of parameters in exposure equations, such as the elimination rate, which is still an active area of research for PFAS chemicals.""
+"
+Legacy and emerging pollutants in Latin America: A critical review of occurrence and levels in environmental and food samples,"Cristina Marília,  Oliveira Souza, Bruno Alves Rocha, Joseph A Adeyemi, Martí Nadal, José Luis Domingo, Fernando Barbosa, Damià Barceló",-,-,Science of the Total Environment,51,2022,Souza_2022.pdf,no,"  - ""The selection of articles for this review was carried out according to the following relevant points: i) a complete description of the matrices, like geographical localization, collection, and storage of samples; ii) an adequate number of analyzed samples, according to the type of the sample (the amount depends on the sample type); iii) analytical methods described with appropriate quality control (QA/QC) methodology.""
+  - ""For this review, up to 350 publications were identified in the initial search. Among them, only 176 studies were selected and included in this critical review (Fig. 1""
+  - ""The current review intends to cover the literature data on the observed levels of the most representative legacy and EPs in several environmental and food samples.""
+  - ""compiles the current knowledge of the levels of different classes of EPs and legacy pollutants in food and environmental matrices (soil, sediment, water, and air) of the LA region.""",,"
+The paper does not appear to include a meta-analysis. The paper is described as a ""critical review"" that ""compiles the current knowledge of the levels of different classes of EPs and legacy pollutants in food and environmental matrices (soil, sediment, water, and air) of the LA region."" There is no mention of the authors conducting a quantitative synthesis of information from multiple sources, which is the defining characteristic of a meta-analysis.
+
+
+""The current review intends to cover the literature data on the observed levels of the most representative legacy and EPs in several environmental and food samples.""
+""The selection of articles for this review was carried out according to the following relevant points: i) a complete description of the matrices, like geographical localization, collection, and storage of samples; ii) an adequate number of analyzed samples, according to the type of the sample (the amount depends on the sample type); iii) analytical methods described with appropriate quality control (QA/QC) methodology.""
+""For this review, up to 350 publications were identified in the initial search. Among them, only 176 studies were selected and included in this critical review (Fig. 1).""
+
+
+No, the review does not include a meta-analysis.
+
+
+The quotes provided clearly indicate that this is a critical review of the literature, not a meta-analysis. The authors describe their selection criteria for the 176 studies included, but there is no mention of quantitatively synthesizing the data across these studies, which is the defining characteristic of a meta-analysis. The confidence in this answer is high as the paper does not provide any indication that a meta-analysis was conducted.
+"
+Organic Contaminants in Chinese Sewage Sludge: A Meta-Analysis of the Literature of the Past 30 Years,"Xiang-Zhou Meng, Arjun K Venkatesan, Yi-Lin Ni, Joshua C Steele, Ling-Ling Wu, Anders Bignert, Åke Bergman, Rolf U Halden",-,-,Environmental Science and Technology,151,2016,Meng_2016.pdf,yes,"  - ""Using literature from the past 30 years (N = 159), we conducted a meta-analysis of organic contaminants (OCs) in Chinese sludge.""
+  - ""meta-analysis of organic contaminants (OCs) in Chinese sludge.""
+  - ""Data were extracted from the selected papers to develop a database, including compound name, sampling location, concentration, and reference information, which can be obtained upon request.""
+  - ""two-tailed Spearman correlation analysis was performed to determine the relationship among the study distribution, per capita GRP, and population density throughout China.""
+  - ""Comparisons of the concentrations of PAHs in sludges sampled from different periods were examined using either Mann-Whitney U (in two groups of samples) or Kruskal-Wallis H (in more than two groups of samples), both of which are nonparametric tests.""",,"
+The paper states that it conducted a ""meta-analysis of organic contaminants (OCs) in Chinese sludge"" based on literature from the past 30 years. The authors explain that they:
+""Using literature from the past 30 years (N = 159), we conducted a meta-analysis of organic contaminants (OCs) in Chinese sludge.""
+The paper also describes the data analysis methods used, including:
+""Data were extracted from the selected papers to develop a database, including compound name, sampling location, concentration, and reference information, which can be obtained upon request.""
+""Two-tailed Spearman correlation analysis was performed to determine the relationship among the study distribution, per capita GRP, and population density throughout China.""
+""Comparisons of the concentrations of PAHs in sludges sampled from different periods were examined using either Mann-Whitney U (in two groups of samples) or Kruskal-Wallis H (in more than two groups of samples), both of which are nonparametric tests.""
+Based on the descriptions in the paper, this review does appear to include a meta-analysis, as the authors synthesized data from multiple sources to quantitatively analyze the levels and trends of organic contaminants in Chinese sewage sludge.
+"
+Perfluoroalkyl substances and lipid concentrations in the blood: A systematic review of epidemiological studies,"Soon Hoe Ho, Stacy Xin, Hui Soh, Min Xian Wang, Janet Ong, Annabel Seah, Yvonne Wong, Zhanxiong Fang, Shuzhen Sim, Jue Tao Lim, C L E I N F O, Adrian Covaci",-,-,Science of the Total Environment,43,2022,Ho_2022.pdf,no,"  - ""Our decision not to pool the effect sizes concurred with that of a recent review by (Kirk et al., 2018) who similarly did not consider their findings on the associations between PFAS exposure and lipid profiles suitable for meta-analysis.""
+  - ""Consequently, most of the effect sizes were not directly comparable with one another and it might be misleading to pool them together (McKenzie and Brennan, 2022).""
+  - ""Instead, we chose to synthesise the various effect sizes by vote counting the positive and negative effect directions (McKenzie and Brennan, 2022).""",,"
+The paper states that the authors considered performing a meta-analysis but found it to be unfeasible due to variations in the analytical methods used to obtain the effect sizes in different articles:
+""Consequently, most of the effect sizes were not directly comparable with one another and it might be misleading to pool them together (McKenzie and Brennan, 2022).""
+The paper further explains that the decision not to perform a meta-analysis was in line with a previous review by Kirk et al. (2018):
+""Our decision not to pool the effect sizes concurred with that of a recent review by (Kirk et al., 2018) who similarly did not consider their findings on the associations between PFAS exposure and lipid profiles suitable for meta-analysis.""
+Instead, the authors chose to synthesize the effect sizes by vote counting the positive and negative effect directions:
+""Instead, we chose to synthesise the various effect sizes by vote counting the positive and negative effect directions (McKenzie and Brennan, 2022).""
+"
+The Association between ADHD and Environmental Chemicals-A Scoping Review,"Sonja Moore, Laura Paalan, Lisa Melym, Andromachi Katsonouri, Marike Kolossa-Gehring, Hanna Tolonen",-,-,-,-,-,Moore_2022.pdf,yes,"  - ""A systematic review and meta-analysis by Nilsen and Tulve (2020) analyzed 14 studies between 1980 and 2017 [18].""
+  - ""Literature searches were performed in PubMed in June-September 2020 and repeated in Spring 2021 to include any relevant new publications. The search used the terms ""ADHD"", ""meta-analysis"", or ""review"", and each of the HBM4EU priority substances separately.""
+  - ""Only meta-analyses and review articles were included, as they provide more extensive evidence compared to individual studies.""",,"
+The paper indicates that it includes both systematic reviews and meta-analyses:
+""Literature searches were performed in PubMed in June-September 2020 and repeated in Spring 2021 to include any relevant new publications. The search used the terms ""ADHD"", ""meta-analysis"", or ""review"", and each of the HBM4EU priority substances separately.""
+""Only meta-analyses and review articles were included, as they provide more extensive evidence compared to individual studies.""
+""A systematic review and meta-analysis by Nilsen and Tulve (2020) analyzed 14 studies between 1980 and 2017 [18].""
+The paper explicitly states that it includes both systematic reviews and meta-analyses, indicating that the review does include a meta-analysis.
+"

@@ -1,0 +1,73 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Data Shared,"Supporting quotes for ""Data Shared""","Supporting  tables for ""Data Shared""","Reasoning for ""Data Shared"""
+Behavioral effects of triadimefon in zebrafish are associated with alterations of the dopaminergic and serotonergic pathways,"Susana Paredes-Zúñiga, Nils Trost, Javiera F De La Paz, Julio Alcayaga, Miguel L Allende",-,-,Progress in Neuro-psychopharmacology and Biological Psychiatry,26,2019,zuniga_2019.pdf,no,"  - ""Authors declare no conflicts of interest. The founding sponsors had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript, and in the decision to publish the results.""",,"
+To determine if the raw data used for the analyses in this paper has been publicly shared, I will look for any mentions of data sharing in the paper.
+
+""Authors declare no conflicts of interest. The founding sponsors had no role in the design of the study; in the collection, analyses, or interpretation of data; in the writing of the manuscript, and in the decision to publish the results.""
+This quote suggests that the authors collected and analyzed data, but does not indicate whether the raw data has been shared.
+
+The paper does not contain any explicit mentions of the raw data being shared publicly, in supplementary materials, or in external repositories. There are also no links or references to where the raw data can be accessed.
+"
+Carbofuran induces increased anxiety-like behaviors in female zebrafish (Danio rerio) through disturbing dopaminergic/ norepinephrinergic system,"Shuang Liu, Miao Yu, Xincen Xie, Yiran Ru, Shaoguo Ru, David Volz",-,-,-,-,-,liu_2020.pdf,no,"  - ""All experiments were repeated twice.""
+  - ""Supplementary data to this article can be found online at https://doi.org/10.1016/j.chemosphere.2020.126635.""",,"
+To determine if the raw data used for the analyses presented in the article has been publicly shared, I will look for any mentions of data sharing in the paper.
+""Supplementary data to this article can be found online at https://doi.org/10.1016/j.chemosphere.2020.126635.""
+This quote indicates that supplementary data related to the article is available online, which suggests the raw data may have been shared.
+""All experiments were repeated twice.""
+This quote suggests that the authors collected raw data from multiple experimental replicates, which would need to be shared to allow for verification and reanalysis of the results.
+However, the paper does not explicitly state that the raw data has been shared. The supplementary materials link only mentions ""supplementary data"" without specifying if this includes the raw data.
+"
+"Embryonic atrazine exposure and later in life behavioral and brain transcriptomic, epigenetic, and pathological alterations in adult male zebrafish","Katharine A Horzmann, Li F Lin, Boghos Taslakjian, Chongli Yuan, Jennifer L Freeman",-,-,Cell Biology and Toxicology,21,2020,horzmann_2022.pdf,yes,"  - ""The transcriptomic datasets generated during the current study are available in the NCBI Gene Expression Onmibus (GEO) repository, [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE112504]. Other data from the manuscript is available from the corresponding author on reasonable request.""
+  - ""Other data from the manuscript is available from the corresponding author on reasonable request.""
+  - ""The transcriptomic datasets generated during the current study are available in the NCBI Gene Expression Onmibus (GEO) repository, [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE112504].""",,"
+The paper states that the transcriptomic datasets generated during the current study are available in the NCBI Gene Expression Omnibus (GEO) repository:
+""The transcriptomic datasets generated during the current study are available in the NCBI Gene Expression Onmibus (GEO) repository, [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE112504].""
+This indicates that the raw transcriptomic data used for the analyses in the paper has been publicly shared in a data repository. However, the paper does not mention whether any other raw data, such as the behavioral, histopathological, or methylation data, has been shared.
+"
+Neurobehavioral Impairments Caused by Developmental Imidacloprid Exposure in Zebrafish,"Emily B Crosby, Jordan M Bailey, Anthony N Oliveri, Edward D Levin",-,-,Neurotoxicology and Teratology,145,2015,crosby_2015.pdf,no,"  - ""EthoVision XT ® software calculated swim speed, location and total distance traveled.""
+  - ""Video data were analyzed and total distance traveled for each individual larva during each min of each 10 min phases was calculated.""
+  - ""All data were analyzed with SYSTAT 13 (Systat Software, San Jose, CA, USA) and SuperAnova (SAS Institute, Cary, NC, USA) using a repeated measures analysis of variance (ANOVA), with dependent variables appropriate to each behavioral test, and Dunnett's post hoc to identify differences of each exposed group from controls.""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been publicly shared. There are no mentions of the raw data being available in supplementary materials, appendices, external repositories, or embedded in the article. The paper only presents summary statistics, graphs, and processed outputs from the analyses, but does not provide access to the underlying raw data.
+""All data were analyzed with SYSTAT 13 (Systat Software, San Jose, CA, USA) and SuperAnova (SAS Institute, Cary, NC, USA) using a repeated measures analysis of variance (ANOVA), with dependent variables appropriate to each behavioral test, and Dunnett's post hoc to identify differences of each exposed group from controls.""
+""Video data were analyzed and total distance traveled for each individual larva during each min of each 10 min phases was calculated.""
+""EthoVision XT ® software calculated swim speed, location and total distance traveled.""
+The paper does not mention sharing the raw data that was used to calculate the summary statistics, swim speeds, and distances reported in the results.
+"
+Quantitative assessment of cypermethrin induced behavioural and biochemical anomalies in adult zebrafish,"Shubham Nema, Yogesh Bhargava",-,-,Neurotoxicology and Teratology,21,2018,nema_2018.pdf,no,"  - ""Supplementary data to this article can be found online at https:// doi.org/10.1016/j.ntt.2018.05.003.""",,"
+To determine if the raw data used for the analyses presented in the article has been publicly shared, I will look for any mentions of data sharing in the paper.
+
+""Supplementary data to this article can be found online at https:// doi.org/10.1016/j.ntt.2018.05.003.""
+This quote indicates that supplementary data related to the article is available online, which could potentially include the raw data used in the analyses.
+
+However, the paper does not explicitly state that the raw data has been shared. The supplementary data could include other information such as additional figures, tables, or analyses, but there is no clear mention of the raw data being publicly available.
+"
+The organophosphate insecticide diazinon and aging: Neurobehavioral and mitochondrial effects in zebrafish exposed as embryos or during aging,"Jonna Boyda, Andrew B Hawkey, Zade R Holloway, Rafael Trevisan, Richard T Di Giulio, Edward D Levin, G A Richardson",-,-,Neurotoxicology and Teratology,16,2021,boyda_2021.pdf,no,"  - ""Laboratory-reared wild-type zebrafish (AB*) were maintained in a recirculating AHAB system (Aquatic Habitats, Inc., Apopka, FL, USA) with a 14:10 h light/dark cycle.""
+  - ""Outliers were removed from the tissue-specific OCR assay data using the GraphPad Prism 8.0 QuickCalcs Outlier Calculator at alpha p < 0.05.""
+  - ""All analyses were conducted using Graph Pad Prism 8.0 (San Diego, CA, USA).""",,"
+The paper does not explicitly mention that the raw data used for the analyses has been publicly shared. There are no references to supplementary materials, appendices, external repositories, or links where the raw data can be accessed.
+
+""All analyses were conducted using Graph Pad Prism 8.0 (San Diego, CA, USA).""
+This quote indicates that the analyses were conducted using a commercial software, but does not mention any sharing of the raw data.
+""Outliers were removed from the tissue-specific OCR assay data using the GraphPad Prism 8.0 QuickCalcs Outlier Calculator at alpha p 
+"
+"Tributyltin enhanced anxiety of adult male zebrafish through elevating cortisol level and disruption in serotonin, dopamine and gamma-aminobutyric acid neurotransmitter pathways","Xin Tu, Ying-Wen Li, Qi-Liang Chen, Yan-Jun Shen, Zhi-Hao Liu",-,-,Ecotoxicology and Environmental Safety,36,2020,tu_2020.pdf,no,"  - ""The data are expressed as the mean � standard error of mean (SEM).""
+  - ""Supplementary data to this article can be found online at https://doi. org/10.1016/j.ecoenv.2020.111014.""",,"
+The paper does not explicitly state whether the raw data used for the analyses has been publicly shared. However, the paper does mention that ""Supplementary data to this article can be found online at https://doi.org/10.1016/j.ecoenv.2020.111014."" This suggests that some supplementary data may be available, but it is not clear if this includes the raw data used in the analyses.
+
+""Supplementary data to this article can be found online at https://doi.org/10.1016/j.ecoenv.2020.111014.""
+
+Additionally, the paper states that ""The data are expressed as the mean ± standard error of mean (SEM)."" This indicates that the data is presented in summarized form in the paper, but does not confirm whether the raw data has been shared.
+
+""The data are expressed as the mean ± standard error of mean (SEM).""
+
+"
+Zebrafish provide a sensitive model of persisting neurobehavioral effects of developmental chlorpyrifos exposure: Comparison with nicotine and pilocarpine effects and relationship to dopamine deficits,"Donnie Eddins, Daniel Cerutti, Paul Williams, Elwood Linney, Edward D Levin",-,-,Neurotoxicology and Teratology,232,2010,eddins_2010.pdf,no,"  - ""The statistical model was a mixed design analysis of variance with the between subjects factor of developmental exposure and the within subjects factor of repeated trials on the startle test.""
+  - ""The experimental protocol was approved by the Duke University Institutional Committee for the use of animal subjects.""
+  - ""This set of experiments examined the persisting effects of early developmental exposure (0-5 dfp) to CPF on later (2 months of age) neurobehavioral function (startle response).""",,"
+The paper does not explicitly mention whether the raw data used for the analyses has been publicly shared. There are no references to any supplementary materials, appendices, or links to external repositories where the raw data could be accessed.
+
+""This set of experiments examined the persisting effects of early developmental exposure (0-5 dfp) to CPF on later (2 months of age) neurobehavioral function (startle response).""
+""The experimental protocol was approved by the Duke University Institutional Committee for the use of animal subjects.""
+""The statistical model was a mixed design analysis of variance with the between subjects factor of developmental exposure and the within subjects factor of repeated trials on the startle test.""
+
+The paper describes the experimental methods and statistical analyses, but does not indicate that the raw data has been made publicly available.
+"

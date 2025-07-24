@@ -1,0 +1,126 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Data source,"Supporting quotes for ""Data source""","Supporting  tables for ""Data source""","Reasoning for ""Data source"""
+Artificial light at night affects brain plasticity and melatonin in birds,"Stan Moaraf, Yulia Vistoropsky, Tatyana Pozner, Rachel Heiblum, Monika Okuliarová, Michal Zeman, Anat Barnea",-,-,Neuroscience Letters,48,2019,Moaraf_2019.pdf,"The main data source for the melatonin values is Figure 5 in the paper, which summarizes the results of the radioimmunoassay measurements taken at midday and midnight.","  - ""We measured MEL plasma concentrations during midday and during the nights before and during exposure to ALAN, and the results are summarized in Fig. 5""
+  - ""Four blood samples were taken from each bird (Fig. 5 ): at midday on day 1 of week 3 of acclimation, at day 1 of week 3 of the ALAN period; and two at midnight, three days after each of the midday samples. Blood collection at midnight was performed under a dim red light.""
+  - ""Plasma MEL concentrations were measured by direct radioimmunoassay [41], which has been validated for zebra finches [42].""",,"
+To determine the data source for the melatonin data, I will look for the section of the paper that provides the most detailed reporting of the melatonin values. 
+
+The paper states:
+""We measured MEL plasma concentrations during midday and during the nights before and during exposure to ALAN, and the results are summarized in Fig. 5.""
+This indicates that the melatonin data is presented in Figure 5 of the paper.
+
+The paper also provides more details on the melatonin measurements:
+""Four blood samples were taken from each bird (Fig. 5 ): at midday on day 1 of week 3 of acclimation, at day 1 of week 3 of the ALAN period; and two at midnight, three days after each of the midday samples. Blood collection at midnight was performed under a dim red light.""
+This provides the specific details on when the melatonin samples were collected.
+
+The paper further states:
+""Plasma MEL concentrations were measured by direct radioimmunoassay [41], which has been validated for zebra finches [42].""
+This indicates that the melatonin data comes from the radioimmunoassay measurements described.
+
+Therefore, the main data source for the melatonin values is Figure 5 in the paper, which summarizes the results of the radioimmunoassay measurements taken at midday and midnight.
+"
+Bright light at night alters the perception of daylength in Indian weaver bird (Ploceus philippinus),"Jayant Kumar, Shalie Malik, Sanjay Kumar Bhardwaj, Sangeeta Rani",-,-,Journal of Experimental Zoology Part A Ecological and Integrative Physiology,14,2018,Kumar_2018.pdf,"The main data source for the melatonin measurements is the plasma samples collected from the birds at specific time points, as described in the ""For measurement of plasma melatonin levels"" paragraph. The melatonin was measured using an ELISA kit, as described in the ""Plasma melatonin assay"" paragraph. The melatonin data is presented in Figure 2g of the paper.","  - ""For measurement of plasma melatonin levels,""
+  - ""For measurement of plasma melatonin levels, blood samples were taken four times in a day, to cover midday and midnight points, and the midpoint of each phase of bright night to make the data comparable. Accordingly, birds (n = 5 each group) were bled at ZTs 04 (midday), 10 (early night), 16 (midnight), and 22 (late light) by puncturing the brachial wing vein. The sampling was scattered over a period of 14 days (days 5-18; internal control, and days 44-57; night light treatment; pattern A) and days 44-57 in remaining groups of night light treatment; pattern B.""
+  - ""Plasma melatonin assay was done by ELISA using a specific melatonin kit (product no. RE54021, IBL International GmbH, Hamburg, Germany). This assay has been previously used for measuring the plasma melatonin in rats and humans (Lahiri, Ge, Sharman, & Bondy, 2004;Terzieva, Mateva, & Vladimirova-Kitova, 2009) and birds (Indian weaver bird and blackheaded bunting) (Singh et al., 2012; Yadav et al., 2015). Melatonin was extracted and assayed from each plasma sample, as per manufacturer's protocol and instructions.""
+  - ""The plasma melatonin showed rhythmic expression under both control and entire bright night (control: F 3,12 = 14.15, P = 0.0003; entire night group: one-way RM ANOVA; Figure 2g""",,"
+To determine the data source for the melatonin data, I will look for the sections of the paper that report the most detailed information on the melatonin measurements and values. Based on the paper, the key information on melatonin appears to be in the following sections:
+
+
+""For measurement of plasma melatonin levels, blood samples were taken four times in a day, to cover midday and midnight points, and the midpoint of each phase of bright night to make the data comparable. Accordingly, birds (n = 5 each group) were bled at ZTs 04 (midday), 10 (early night), 16 (midnight), and 22 (late light) by puncturing the brachial wing vein. The sampling was scattered over a period of 14 days (days 5-18; internal control, and days 44-57; night light treatment; pattern A) and days 44-57 in remaining groups of night light treatment; pattern B.""
+
+This paragraph describes the detailed sampling protocol for measuring melatonin levels, including the time points, number of birds, and duration of sampling.
+
+
+""Plasma melatonin assay was done by ELISA using a specific melatonin kit (product no. RE54021, IBL International GmbH, Hamburg, Germany). This assay has been previously used for measuring the plasma melatonin in rats and humans (Lahiri, Ge, Sharman, & Bondy, 2004;Terzieva, Mateva, & Vladimirova-Kitova, 2009) and birds (Indian weaver bird and blackheaded bunting) (Singh et al., 2012; Yadav et al., 2015). Melatonin was extracted and assayed from each plasma sample, as per manufacturer's protocol and instructions.""
+
+This paragraph provides details on the specific ELISA kit used to measure melatonin, as well as previous use of this assay in other species.
+
+
+""The plasma melatonin showed rhythmic expression under both control and entire bright night (control: F 3,12 = 14.15, P = 0.0003; entire night group: one-way RM ANOVA; Figure 2g).""
+
+This quote refers to the melatonin data presented in Figure 2g of the paper.
+"
+Can skyglow reduce nocturnal melatonin concentrations in Eurasian perch? *,"Franziska Kupprat, Franz H € Olker, Werner Kloas, Sarah Harmon",-,-,Environmental Pollution,38,2020,Kupprat_2020.pdf,"The main data source for the melatonin values reported in this paper is the detailed experimental setup and melatonin measurement procedures described in the previous study by Brüning et al. (2015), which this study replicated. The specific details on the water sampling, ELISA analysis, and number of samples are also provided in the current paper.","  - ""The experiment was done according to the setup and procedure of Brüning et al. (2015). The light intensities were further dimmed down to 0.1 lx and 0.01 lx by partially covering the light source with tape and neutral density filter foil. Everything else was replicated with great care to ensure comparability of the results.""
+  - ""Melatonin concentrations were determined in duplicates according to manufacturer's protocol with a commercially available ELISA kit (Melatonin Saliva ELISA, IBL, Hamburg, Germany). All 216 samples were randomized across 6 assays, which were run one after another within one week.""
+  - ""After ten days of experimental conditions 1 L of holding water from each aquarium was sampled every 3 h over a 24 h period (11 a.m., 2 p.m., 5 p.m., 8 p.m., 11 p.m., 2 a.m., 5 a.m., 8 a.m., 11 a.m.)""",,"
+To determine the main data source for the melatonin values reported in this paper, I will look for the most detailed reporting of the melatonin measurements and experimental setup.
+
+""The experiment was done according to the setup and procedure of Brüning et al. (2015). The light intensities were further dimmed down to 0.1 lx and 0.01 lx by partially covering the light source with tape and neutral density filter foil. Everything else was replicated with great care to ensure comparability of the results.""
+This quote indicates that the experimental setup and procedure was based on a previous study by Brüning et al. (2015), which likely contained the most detailed reporting of the melatonin measurements.
+
+""After ten days of experimental conditions 1 L of holding water from each aquarium was sampled every 3 h over a 24 h period (11 a.m., 2 p.m., 5 p.m., 8 p.m., 11 p.m., 2 a.m., 5 a.m., 8 a.m., 11 a.m.).""
+This quote describes the specific sampling procedure for the melatonin measurements, which provides details on the data collection.
+
+""Melatonin concentrations were determined in duplicates according to manufacturer's protocol with a commercially available ELISA kit (Melatonin Saliva ELISA, IBL, Hamburg, Germany). All 216 samples were randomized across 6 assays, which were run one after another within one week.""
+This quote describes the analytical method used to measure the melatonin concentrations, providing further details on the data source.
+"
+"Differential response of diurnal and nocturnal mammals to prolonged altered light-dark cycle: a possible role of mood associated endocrine, inflammatory and antioxidant system","Ruchika Kumari, Vivek Verma, Noga Kronfeld-Schor, Muniyandi Singaravel",-,-,Chronobiology International,12,2021,Kumari_2021.pdf,The data source for the melatonin values is Figure 3a.,"  - ""Prolonged exposure of squirrels to darkness did not produce a significant change in the serum melatonin concentration when compared to the LD group (Figure 3a ). Contrarily, constant light exposure showed a significant reduction in serum melatonin levels compared to both LD and DD (p < .05 and p < .01, respectively) (Figure 3a""
+  - ""In mice, DD causes a significant increase in serum melatonin levels compared to LD (p < .05) (Figure 3a ), while prolonged LL exposure significantly reduced the serum melatonin levels compared to both LD and DD (p < .01 and p < .001, respectively) (Figure 3a""
+  - ""Chronic exposure of squirrels to both constant darkness and constant light caused a significant reduction in sucrose preference compared to LD (p < .01 and p < .001, respectively) (Figure 2""",,"
+To determine the data source for the melatonin values reported in the paper, I will look for the most detailed reporting of the melatonin data, which is likely to be in a figure or table.
+
+
+""Chronic exposure of squirrels to both constant darkness and constant light caused a significant reduction in sucrose preference compared to LD (p 
+
+The most detailed reporting of the melatonin data appears to be in Figure 3a, which shows the serum melatonin levels for both squirrels and mice under the different light conditions.
+"
+LIGHT AT NIGHT CANNOT SUPPRESS PINEAL MELATONIN LEVELS IN THE LIZARD ANOLZS CAROLZNENSZS,Herbert Underwcod,-,-,-,-,-,Underwood_1986.pdf,"1. Experiment where anoles were exposed to natural sunlight (12,500-7,600 lux) for 2 hours in the afternoon, with melatonin levels measured at 3pm and 4pm.
+2. Experiment where anoles were exposed to high intensity artificial light (24,100 lux) for 2 hours in the afternoon, with melatonin levels measured at 3pm and 4pm.","  - ""Freshly collected anoles were placed under stockroom conditions on 26 June 1985. On 5 July 1985, groups of lizards were placed in boxes in the environmental room under identical conditions as described for experiment 1 for 14 days. On day 14 half of the lizards were exposed to sunlight from 2 to 4p.m. The lizards were not misted but were held in the shade to avoid heat stress. Light intensities measured 12,500 lux at 2 p.m. and 7600 lux at 4 p.m. ambient outdoor temperatures averaged 30°C. Groups of sun-exposed and dark control anoles were killed at 3 p.m. and 4 p.m. and melatonin levels were subsequently assayed.""
+  - ""Freshly collected anoles were placed under stockroom conditions on 26 July 1985. On 2 August 1985 lizards were placed in terraria in one of two 'C' chambers in the Phytotron on the NCSU campus. The lizards were exposed to LD 12: 12 (cool white fluorescent lights, 5400 lux) with lights on from 9 p.m. to 9 a.m. and constant temperature (30_+0.25""C). On day 22 (23 August) half of the lizards were exposed to 24,100 lux of fluorescent plus incandescent illumination from 2 to 4 p.m. while the other half remained in the dark. Illuminated and dark-control lizards were killed at 3 and 4p.m. and melatonin levels were subsequently assayed.""",,"
+To determine the ""Data source"" in this paper, I will look for the sections that report the most detailed melatonin data and the experimental conditions under which that data was collected.
+
+""Freshly collected anoles were placed under stockroom conditions on 26 June 1985. On 5 July 1985, groups of lizards were placed in boxes in the environmental room under identical conditions as described for experiment 1 for 14 days. On day 14 half of the lizards were exposed to sunlight from 2 to 4p.m. The lizards were not misted but were held in the shade to avoid heat stress. Light intensities measured 12,500 lux at 2 p.m. and 7600 lux at 4 p.m. ambient outdoor temperatures averaged 30°C. Groups of sun-exposed and dark control anoles were killed at 3 p.m. and 4 p.m. and melatonin levels were subsequently assayed.""
+This paragraph describes an experiment where anoles were exposed to natural sunlight for 2 hours in the afternoon, and their melatonin levels were measured at 3pm and 4pm.
+
+""Freshly collected anoles were placed under stockroom conditions on 26 July 1985. On 2 August 1985 lizards were placed in terraria in one of two 'C' chambers in the Phytotron on the NCSU campus. The lizards were exposed to LD 12: 12 (cool white fluorescent lights, 5400 lux) with lights on from 9 p.m. to 9 a.m. and constant temperature (30_+0.25""C). On day 22 (23 August) half of the lizards were exposed to 24,100 lux of fluorescent plus incandescent illumination from 2 to 4 p.m. while the other half remained in the dark. Illuminated and dark-control lizards were killed at 3 and 4p.m. and melatonin levels were subsequently assayed.""
+This paragraph describes another experiment where anoles were exposed to high intensity artificial light (24,100 lux) for 2 hours in the afternoon, and their melatonin levels were measured at 3pm and 4pm.
+
+These two experiments appear to be the most detailed sources of melatonin data in the paper, with the experimental conditions and melatonin measurements clearly reported.
+"
+"Persistence of a plasma melatonin rhythm in constant darkness and its inhibition by constant light in the sleepy lizard, Tiliqua rugosa","Bruce T Firth, Ingrid Belan, David J Kennaway",-,-,Journal of Pineal Research,11,2006,Firth_2006.pdf,"The main data source for the melatonin values reported in this paper is Figure 4, which shows the blood plasma melatonin rhythm of lizards held in 33°C and 12L:12D for 6 days, followed by 3 days in constant light (LL).","  - ""When a more sensitive RIA was used, there was a relatively high amplitude melatonin rhythm in 12L:12D and constant 33°C (Experiment 4, Fig. 4 ). However, when the lizards were subjected to LL for 3 days, the nocturnal melatonin levels dropped dramatically and were significantly lower (P < 0.001) than in 12L:12D, indicating that LL inhibited nighttime melatonin levels over 3 days.""
+  - ""In lizards acclimated to comparable conditions to Experiment 1, but with only 5 days exposure to DD in autumn, there was a significant rhythm of melatonin production at the end of the 5 days (P < 0.05) (Experiment 2, Fig. 2""
+  - ""In Experiment 1, lizards exposed to 12L:12D and constant 33°C in the austral spring displayed a significant rhythm of plasma melatonin. Furthermore, after 3 and 6 days of DD, there was also a significant melatonin rhythm (Fig. 1""",,"
+To determine the ""Data source"" for the melatonin values reported in this paper, I will look for the most detailed reporting of the melatonin data, which is likely to be in a figure, table, or specific section of the text.
+
+""When a more sensitive RIA was used, there was a relatively high amplitude melatonin rhythm in 12L:12D and constant 33°C (Experiment 4, Fig. 4). However, when the lizards were subjected to LL for 3 days, the nocturnal melatonin levels dropped dramatically and were significantly lower (P < 0.001) than in 12L:12D, indicating that LL inhibited nighttime melatonin levels over 3 days.""
+This quote indicates that the most detailed reporting of the melatonin data is in Experiment 4, which is shown in Figure 4.
+
+""In Experiment 1, lizards exposed to 12L:12D and constant 33°C in the austral spring displayed a significant rhythm of plasma melatonin. Furthermore, after 3 and 6 days of DD, there was also a significant melatonin rhythm (Fig. 1).""
+This quote also references melatonin data being shown in Figure 1, which is another potential data source.
+
+""In lizards acclimated to comparable conditions to Experiment 1, but with only 5 days exposure to DD in autumn, there was a significant rhythm of melatonin production at the end of the 5 days (P < 0.05) (Experiment 2, Fig. 2).""
+This quote references melatonin data being shown in Figure 2, which is another potential data source.
+
+"
+Role of light wavelengths in synchronization of circadian physiology in songbirds,"G Yadav, S Malik, S Rani, V Kumar",-,-,Physiology and Behavior,20,2015,Yadav_2015.pdf,"The main data source for the melatonin values is Figure 3, which shows the plasma melatonin levels measured by ELISA at ZT6 and ZT18 in both blackheaded buntings and Indian weaver birds under different light conditions.","  - ""Plasma melatonin concentration (pg/ml) was measured by ELISA using a specific melatonin kit (product no. RE54021, IBL International GmbH, Hamburg, Germany), previously standardized and used in our laboratory for the measurement of melatonin in weaverbirds' samples [30].""
+  - ""Melatonin was extracted and assayed from each plasma sample, as per manufacturer's protocol and instructions. Briefly, methanol extracted volumes of experimental samples, standards and controls were dried by a vacuum concentrator. Obtained pellet was reconstituted in double distilled water, and 50 μl of each reconstituted sample volume and 50 μl melatonin anti-serum (rabbit, polyclonal) were incubated in a 96 well plate at 4 °C for 20 h. Thereafter, 150 μl of freshly prepared enzyme conjugate was added and incubated for 2 h at room temperature with continuous shaking (500 rpm). Then, 200 μl of freshly prepared p-nitrophenyl phosphate (PNPP) substrate solution was added to each well, and incubated for another 40 min. The reaction was stopped by adding 50 μl of PNPP stop solution to each well, and optical density (OD) was measured at 405 nm wavelength, using 650 nm wavelength as reference.""
+  - ""In both species, plasma melatonin levels were low during the day and significantly high at night, consistent with diurnal pattern of melatonin secretion (ZT6 vs. ZT18: bunting: t = 2.450, Df = 6, P b 0.05; Indian weaver bird: t = 8.867, Df = 6, P b 0.0001; Student t-test; Fig. 3a""",,"
+To determine the data source for the melatonin data, I will look for sections in the paper that report detailed melatonin values, such as figures, tables, or specific text passages.
+
+""Plasma melatonin concentration (pg/ml) was measured by ELISA using a specific melatonin kit (product no. RE54021, IBL International GmbH, Hamburg, Germany), previously standardized and used in our laboratory for the measurement of melatonin in weaverbirds' samples [30].""
+This quote indicates that the melatonin data was obtained through ELISA measurements of plasma samples.
+
+""Melatonin was extracted and assayed from each plasma sample, as per manufacturer's protocol and instructions. Briefly, methanol extracted volumes of experimental samples, standards and controls were dried by a vacuum concentrator. Obtained pellet was reconstituted in double distilled water, and 50 μl of each reconstituted sample volume and 50 μl melatonin anti-serum (rabbit, polyclonal) were incubated in a 96 well plate at 4 °C for 20 h. Thereafter, 150 μl of freshly prepared enzyme conjugate was added and incubated for 2 h at room temperature with continuous shaking (500 rpm). Then, 200 μl of freshly prepared p-nitrophenyl phosphate (PNPP) substrate solution was added to each well, and incubated for another 40 min. The reaction was stopped by adding 50 μl of PNPP stop solution to each well, and optical density (OD) was measured at 405 nm wavelength, using 650 nm wavelength as reference.""
+This quote provides more details on the ELISA protocol used to measure melatonin levels.
+
+""In both species, plasma melatonin levels were low during the day and significantly high at night, consistent with diurnal pattern of melatonin secretion (ZT6 vs. ZT18: bunting: t = 2.450, Df = 6, P b 0.05; Indian weaver bird: t = 8.867, Df = 6, P b 0.0001; Student t-test; Fig. 3a).""
+This quote indicates that the melatonin data is presented in Figure 3a of the paper.
+"
+"Studies on Pineal Melatonin Levels in a Diurnal Species, the Eastern Chipmunk (Tamias striatus): Effects of Light at Night, Propranolol Administration or Superior Cervical Ganglionectomy","R J Reiter, T S King, B A Richardson, E C Hurlbut",-,-,Journal of neural transmission,15,2005,Reiter_1982.pdf,"The main data sources for the melatonin values and their response to artificial light at night are Figures 1, 2, 4, and 5 in the paper.","  - ""Experiment 1. Regardless of whether chipmunks were exposed to darkness at night or whether the light phase was extended into the normal dark period, pineal levels of melatonin exhibited highly significant increases (Fig. 1 ) at both 2 a.m. and 4 a.m.""
+  - ""Experiment 4. When chipmunks were acutely exposed to light at midnight pineal melatonin levels dropped very slowly (Fig. 4""
+  - ""Experiment 2. Chipmunks killed at midnight had highly significant increases in pineal melatonin content compared to those in glands collected at 8 p.m., the time at which the lights were turned off (Fig. 2""",,"
+To determine the ""Data source"" in this paper, I will look for the sections that provide the most detailed reporting of the melatonin values and their response to artificial light at night.
+
+The paper describes several experiments that examined the effects of light at night, propranolol administration, and superior cervical ganglionectomy on pineal melatonin levels in Eastern chipmunks. The most detailed reporting of the melatonin data appears to be in the ""Results"" section, which provides the following relevant quotes:
+
+""Experiment 1. Regardless of whether chipmunks were exposed to darkness at night or whether the light phase was extended into the normal dark period, pineal levels of melatonin exhibited highly significant increases (Fig. 1) at both 2 a.m. and 4 a.m.""
+This quote indicates that Figure 1 contains the detailed melatonin data for Experiment 1.
+
+""Experiment 2. Chipmunks killed at midnight had highly significant increases in pineal melatonin content compared to those in glands collected at 8 p.m., the time at which the lights were turned off (Fig. 2).""
+This quote indicates that Figure 2 contains the detailed melatonin data for Experiment 2.
+
+""Experiment 4. When chipmunks were acutely exposed to light at midnight pineal melatonin levels dropped very slowly (Fig. 4).""
+This quote indicates that Figure 4 contains the detailed melatonin data for Experiment 4.
+
+""Experiment 5. In contrast to the response to light at midnight, when chipmunks were exposed to the same intensity light at 3 a.m. pineal melatonin levels dropped rapidly. Within 15 min daytime levels of melatonin were already achieved (Fig. 5).""
+This quote indicates that Figure 5 contains the detailed melatonin data for Experiment 5.
+"

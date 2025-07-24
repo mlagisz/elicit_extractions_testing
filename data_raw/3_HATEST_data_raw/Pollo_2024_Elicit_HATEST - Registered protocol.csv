@@ -1,0 +1,73 @@
+﻿Title,Authors,DOI,DOI link,Venue,Citation count,Year,Filename,Registered protocol,"Supporting quotes for ""Registered protocol""","Supporting  tables for ""Registered protocol""","Reasoning for ""Registered protocol"""
+,"Luis M Torres-Vila, Michael D Jennions, A Cockburn",-,-,-,-,-,Torres-Vila_2005.pdf,no,"  - ""We therefore performed a metaanalysis using data from 29 studies of 25 species.""
+  - ""We consulted scientific literature databases, the Internet and previous reviews on this and related topics (Ridley 1988;Vahed 1998;Arnqvist and Nilsson 2000;Torres-Vila et al. 2004) to compile data from 29 studies of 25 Lepidopteran species that related female reproductive output to male mating history (Table 1""
+  - ""We excluded the well-known study of Oberhauser (1989) as it conflated male mating history and male age.""
+  - ""We calculated mean effect sizes weighted for sample size (sampling variance) using MetaWin 2.0 (Rosenberg et al. 2000).""
+  - ""We ran random effects models that allow for a true random component, in addition to sampling error, as a source of variation in effect size among studies (Hedges and Olkin 1985).""
+  - ""We calculated Rosenthal's fail-safe number to assess the robustness of our results.""
+  - ""We also used the ""trim and fill"" method of Duvall and Tweedie (2000) to estimate the number of ""missing"" studies based on a funnel plot of the data (i.e. effect size vs sample size) and then calculated the mean effect if these hypothetical ""missing"" studies are included.""",,"- The paper describes a meta-analysis using data from 29 studies of 25 species, indicating that the study is a review of existing literature rather than a new experimental study.
+- The methodology involves compiling data from existing studies and using statistical tools like MetaWin 2.0 and random effects models, which are typical for meta-analyses.
+- There is no mention of a registered protocol, pre-registration, or a pre-defined study plan specific to this meta-analysis.
+- The focus is on analyzing existing data rather than conducting new experiments or following a specific protocol."
+Assortative Mating in Animals,"Yuexin Jiang, Daniel I Bolnick, Mark Kirkpatrick",-,-,American Naturalist,367,2013,Jiang_2013.pdf,no,"  - ""an exhaustive search is not necessary for meta-analysis, which is fundamentally a sampling activity intended to retrieve studies that are representative of the question of interest.""
+  - ""We reviewed more than 13,000 publications.""
+  - ""The database used for meta-analysis is available in Dryad (http://dx.doi.org/10.5061/dryad.r706v).""
+  - ""We searched for publications reporting suitable measures of assortative mating, using keywords searches in multiple databases, including Google Scholar, JSTOR, and Web of Science.""
+  - ""We conducted a mixed-model meta-analysis of assortative mating based on phenotypic traits within natural animal populations.""",,"- The paper describes a meta-analysis, which involves collecting and analyzing data from existing studies rather than conducting new experiments.
+- The authors mention searching for publications and using databases to gather data, indicating that the study was based on existing literature rather than a pre-defined protocol or new experimental design.
+- There is no mention of a registered protocol or pre-registration of the study, which is typically required for new experimental research.
+- The focus on reviewing existing publications and the nature of meta-analysis suggest that the study was not based on a pre-defined protocol or study plan in the traditional sense."
+Darwinian sex roles confirmed across the animal kingdom,"Tim Janicke, Ines K Häderer, Marc J Lajeunesse, Nils Anthes",-,-,Science Advances,328,2016,Janicke_2016.pdf,no,"  - ""The systematic literature search largely followed the PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) statement (44).""
+  - ""This literature search was initiated on 6 December 2012 and repeated on 25 April 2015.""
+  - ""Further, we posted a request for ""gray"" literature and unpublished data sets on the ""EvolDir"" mailing list (http://evol.mcmaster. ca/evoldir.html) on 4 December 2012.""
+  - ""This search protocol identified 2159 candidate studies (database search: 2159 candidates; gray literature and unpublished data: 0 candidates).""
+  - ""We added 22 studies to this candidate pool based on downward citation searches using the candidates identified with ISI Web of Knowledge (fig.  S1""
+  - ""All studies (n = 2181) were then screened and assessed for eligibility to comply with two inclusion criteria.""",,"- The paper describes a systematic literature search that followed the PRISMA statement, which is a protocol for conducting systematic reviews.
+- The search was conducted in a structured manner, with specific dates mentioned for the initiation and repetition of the search.
+- The authors also posted a request for additional data on a mailing list, indicating a pre-defined approach to gathering data.
+- The study involved screening and assessing studies based on specific inclusion criteria, which suggests a structured protocol.
+- However, there is no explicit mention of the study being registered or pre-registered in a database like PROSPERO or similar."
+Measuring and interpreting sexual selection metrics: evaluation and guidelines,"Nils Anthes, Ines K H € Aderer, Nico K Michiels, Tim Janicke",-,-,,42,2017,Anthes_2017.pdf,no,"  - ""We expect this meta-analytical review to aid future studies in providing less biased and more informative estimates of sexual selection.""
+  - ""N.A. conceived the study and lead manuscript preparation. N.A., T.J. and I.K.H. designed the methodology, collected and analysed the data, and with N.K.M. developed the final guidelines proposed here.""",,"- The paper is a meta-analytical review, which means it synthesizes data from existing studies rather than conducting new experiments.
+- The authors mention that they designed the methodology and collected data, but there is no mention of a registered protocol or pre-registration of the study.
+- The focus of the paper is on reviewing existing literature and providing guidelines for future studies, rather than conducting a new study that would require a registered protocol.
+- There is no indication in the paper that the authors followed a pre-defined protocol or study plan that was registered or pre-registered."
+Mechanisms of Social Influence: A Meta-Analysis of the Effects of Social Information on Female Mate Choice Decisions,"Blake Carlton Jones, Emily H Duval",-,-,Frontiers in Ecology and Evolution,35,2019,Jones_2019.pdf,no,"  - ""We conducted a meta-analysis of empirical studies quantifying mate-choice copying in non-human animals.""
+  - ""We identified relevant studies using a topic search in Web of Science (ISI Thomas Reuters) specifying the search criteria as: TS""
+  - ""targeting peer-reviewed research published between 1900 and May 2019.""
+  - ""We were left with 40 empirical studies reporting 103 separate experiments that tested directly for female mate-choice copying (Figure 1""
+  - ""We conducted a meta-analysis of results from mate-choice copying studies using univariate-response Bayesian generalized linear models with Markov chain Monte Carlo (Hadfield, 2010;Hadfield and Nakagawa, 2010) in the programing language R, version 3.6.0 (R Core Team, 2019) and MCMCglmm package (Hadfield, 2010).""
+  - ""We determined the overall effect size of female mate-choice copying using a univariate-response Bayesian generalized linear mixed-effects model with Markov chain Monte Carlo (BMM; Hadfield, 2010;Hadfield and Nakagawa, 2010).""
+  - ""We calculated 103 effect sizes from 40 published studies of mate-choice copying that met our selection criteria.""
+  - ""Our meta-analysis indicated that female mate-choice copying is a widespread and influential phenomenon.""
+  - ""The results of this meta-analysis suggest several areas for future work.""",,"- The paper is a meta-analysis of existing studies on mate-choice copying in non-human animals.
+- The authors conducted a systematic search of literature to identify relevant studies, which is a common practice in meta-analyses.
+- The paper does not mention any new data collection or experimental design conducted by the authors themselves.
+- There is no mention of a registered protocol or pre-registration of a study plan in the paper.
+- The focus is on synthesizing existing research rather than conducting new experiments or following a pre-defined protocol."
+No evidence of immediate fitness benefits of within-season divorce in monogamous birds,"Antica Culina, Lyanne Brouwer",-,-,Biology Letters,5,2022,Culina_2022.pdf,no,"  - ""We conducted a systematic literature search for studies published in English via 15 online databases/search platforms (see electronic supplementary material, Methods) in March 2022.""
+  - ""Following the steps of Preferred Reporting Items for Systematic Review and Meta-analysis (PRISMA, [24]) 33 eligible studies were detected (see data tables, also electronic supplementary material, Methods for PRISMA diagrams).""
+  - ""We performed a systematic review and meta-analyses of eligible studies.""
+  - ""Our full dataset included 31 relevant studies on 24 socially monogamous bird species (table 1 for summary, and data tables), belonging to six bird orders (15 to Passerifomes; five to Charadriiformes, one each to Falconifomes, Piciformes, Strigifomes and Suliformes).""
+  - ""Data sets associated with this article and R codes to conduct the meta-analyses and produce main text and electronic supplementary material figures can be found at Dryad Digital Repository: https://doi.org/10.5061/dryad.3n5tb2rkq [97].""
+  - ""Additional information is provided in electronic supplementary material [98].""",,"- The paper describes a systematic review and meta-analysis, which typically involves a pre-defined protocol to ensure transparency and reproducibility.
+- The authors mention following the PRISMA guidelines, which are standard for systematic reviews and meta-analyses. This suggests a structured approach to the study.
+- The paper includes a detailed description of the literature search process and the criteria for study inclusion, which are typical components of a registered protocol.
+- The availability of data sets and R codes in a digital repository further supports the idea that the study was conducted with a pre-defined protocol, as this allows for transparency and reproducibility.
+- However, there is no explicit mention of the study being registered or pre-registered in a specific registry like PROSPERO, which is common for systematic reviews."
+The relative importance of size and asymmetry in sexual selection,"R Thornhid', A P M0ller, A P Moller",-,-,,88,1998,Thornhill_1998.pdf,no,"  - ""the data are presented in Table 1""
+  - ""The test consisted of pairwise comparisons of the magnitude of a standardized effect size for asymmetry and size of the same characters in the large sample of studies composing the meta-analysis mentioned above.""
+  - ""The aim of the present study was to test whether the magnitude of the effect of asymmetry on sexual selection was similar to that of character size per se, which is known from numerous studies to be related to sexual selection (see review in Andersson, 1994).""
+  - ""The data set used for the present study is from Mailer and Thornhill (1998), which was based on (1) a comprehensive search of the literature and of the Internet for information on the relationship between asymmetry and sexual selection, and (2) correspondence between the authors and behavioral ecologists conducting research on this relationship.""",,"- The paper is a meta-analysis, which means it synthesizes data from existing studies rather than conducting new experiments.
+- The data set used for the study was obtained from a comprehensive literature search and correspondence with other researchers, indicating that the study was not based on a pre-defined protocol or study plan specific to this paper.
+- The study's aim and methodology were to analyze existing data, not to follow a registered protocol or pre-defined study plan.
+- There is no mention of the study being registered or pre-registered in the paper."
+Variation in pre-and post-copulatory sexual selection on male genital size in two species of lygaeid bug,"Liam R Dougherty, David M Shuker",-,-,Behavioral Ecology and Sociobiology,18,2016,Dougherty_2016.pdf,no,"  - ""The individuals used in this experiment were the same as in a previous experiment concerning sexual selection on male and female body size (see Dougherty and Shuker 2014).""
+  - ""We assessed how the strength and pattern of selection on processus length varied between different stages of mating (before or after mating), social contexts (the number of males and females present during mating trials) and studies.""
+  - ""We present the results of two experiments.""
+  - ""We first consider pre-copulatory selection on male processus length arising from differential mating success.""
+  - ""We next consider post-copulatory selection arising via male fertilisation success for mated pairs.""
+  - ""We combined pre-and post-copulatory measures of selection by quantifying the strength of selection arising through male fertilisation success for all males, including those who failed to mate.""",,"- The paper describes two experiments conducted by the authors, which suggests a structured approach to their research.
+- The mention of using individuals from a previous experiment indicates a continuity in their research protocol.
+- The detailed description of the experimental design and the measures taken to assess selection pressures suggests a pre-defined protocol or study plan.
+- However, there is no explicit mention of the study being registered or pre-registered in the paper."
