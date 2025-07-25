@@ -7,6 +7,10 @@ editor_options:
   chunk_output_type: console
 ---
 
+# Data processing, analyses, and visualisation code
+
+Project title: "Using Elicit AI research assistant for data extraction in systematic reviews: a feasibility study across environmental and life sciences" - 
+
 ```{r setup, include=FALSE}
 #install.packages("pacman")
 
@@ -23,10 +27,12 @@ pacman::p_load(
 
 #https://www.color-hex.com/color-palette/49436 #some hex palette for the plots
 #Colors from: https://grafify.shenoylab.com/colour_palettes.html
+
+# sessionInfo()
+# R version 4.5.0 (2025-04-11)
+# Platform: aarch64-apple-darwin20
+# Running under: macOS Sequoia 15.5
 ```
-
-
-NOTE: during development and main testing phases we used human assessment of matches with answers from Elicit because for some categorical variables and other it made sense to be more flexible/inclusive using human interpretation, especially for partial matches (otherwise higher mismatch rate). These decision alongside comments were recorded in Excel sheets.
 
 
 ## Load and prepare main data for the development and main test phases
@@ -437,9 +443,6 @@ ggplot(rdata_DEV_TEST_accuracy_long, aes(x = Accuracy, fill = Phase)) +
                     labels = c("Accuracy_DEV" = "DEV Phase", "Accuracy_TEST" = "TEST Phase")) +
   theme_classic() +
   theme(legend.position = "top")
-
-#Export figure to a png file:
-ggsave(filename = here("plots", "accuracy_DEV_vs_TEST.png"), width = 8, height = 6, dpi = 300)
 ```
 
 
@@ -605,7 +608,7 @@ round(table(newdata_GS$Match, useNA = "always")/length(newdata_GS$Match) * 100, 
 Get accuracy rate for the same set of variables from the main TEST phase:
 
 ```{r}
-#left join prepare newdata_GS TEST results by making a table with number of matches, mismatches and Accuracy for each combination fo Review and Variable:
+#left join prepare newdata_GS TEST results by making a table with number of matches, mismatches and Accuracy for each combination for Review and Variable:
 newdata_GS %>%
   filter (SET == "TEST") %>% #only TEST set
   group_by(Review, Variable) %>%
